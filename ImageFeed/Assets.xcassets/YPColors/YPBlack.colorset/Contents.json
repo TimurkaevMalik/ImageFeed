@@ -10,7 +10,7 @@
           "red" : "26"
         }
       },
-      "idiom" : "universal"
+      "idiom" : "iphone"
     },
     {
       "appearances" : [
@@ -28,7 +28,7 @@
           "red" : "0x1A"
         }
       },
-      "idiom" : "universal"
+      "idiom" : "iphone"
     }
   ],
   "info" : {
