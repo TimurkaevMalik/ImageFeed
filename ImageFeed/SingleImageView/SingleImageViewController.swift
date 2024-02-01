@@ -23,4 +23,9 @@ class SingleImageViewController: UIViewController {
         
         imageView.image = image
     }
+    
+    
+    @IBAction private func didTapBckButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }

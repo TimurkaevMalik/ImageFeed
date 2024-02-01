@@ -29,7 +29,7 @@ class ImagesListViewController: UIViewController {
         
         let isLiked = indexPath.row % 2 == 0
         let likeImage = isLiked ? UIImage(named: "redLike") : UIImage(named: "emptyLike")
-      cell.likeButton.setImage(likeImage, for: .normal)
+        cell.likeButton.setImage(likeImage, for: .normal)
     }
     
     override func viewDidLoad() {
