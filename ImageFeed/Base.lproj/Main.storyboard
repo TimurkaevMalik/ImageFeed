@@ -222,7 +222,7 @@
                                     <outlet property="delegate" destination="iOT-Hr-2Cs" id="dpY-13-t8p"/>
                                 </connections>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLo-Z0-fps">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLo-Z0-fps" userLabel="Back Button">
                                 <rect key="frame" x="4" y="4" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="pkk-Yr-UTM"/>
@@ -234,15 +234,26 @@
                                     <action selector="didTapBackButton:" destination="iOT-Hr-2Cs" eventType="touchUpInside" id="BDm-0m-NGT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h99-gR-G4v" userLabel="Share Button">
+                                <rect key="frame" x="182" y="810" width="50" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="share_button"/>
+                                <connections>
+                                    <action selector="didTapShareButton:" destination="iOT-Hr-2Cs" eventType="touchUpInside" id="bRa-VL-Wag"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="BNv-7r-ecL"/>
                         <color key="backgroundColor" name="YPBlack"/>
                         <constraints>
                             <constraint firstItem="gLo-Z0-fps" firstAttribute="top" secondItem="BNv-7r-ecL" secondAttribute="top" constant="4" id="Nzp-XH-Hbj"/>
+                            <constraint firstItem="h99-gR-G4v" firstAttribute="centerX" secondItem="BNv-7r-ecL" secondAttribute="centerX" id="Tsd-Dd-toJ"/>
                             <constraint firstAttribute="bottom" secondItem="1yx-Gf-MTp" secondAttribute="bottom" id="U0u-qb-X6A"/>
                             <constraint firstItem="BNv-7r-ecL" firstAttribute="trailing" secondItem="1yx-Gf-MTp" secondAttribute="trailing" id="Xyq-fv-KUn"/>
                             <constraint firstItem="1yx-Gf-MTp" firstAttribute="leading" secondItem="BNv-7r-ecL" secondAttribute="leading" id="iam-5u-7AK"/>
                             <constraint firstItem="1yx-Gf-MTp" firstAttribute="top" secondItem="QK4-5J-AFy" secondAttribute="top" id="k1g-5c-wXE"/>
+                            <constraint firstItem="BNv-7r-ecL" firstAttribute="bottom" secondItem="h99-gR-G4v" secondAttribute="bottom" constant="36" id="niv-Yl-oqg"/>
                             <constraint firstItem="gLo-Z0-fps" firstAttribute="leading" secondItem="BNv-7r-ecL" secondAttribute="leading" constant="4" id="tEb-oq-sO4"/>
                         </constraints>
                     </view>
@@ -263,6 +274,7 @@
         <image name="logout_button" width="20" height="22"/>
         <image name="nav_back_button_white" width="24" height="24"/>
         <image name="redLike" width="30" height="28"/>
+        <image name="share_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YPBlack">
