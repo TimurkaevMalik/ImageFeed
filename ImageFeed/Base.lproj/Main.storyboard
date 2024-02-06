@@ -85,7 +85,9 @@
                             <constraint firstItem="sVu-5g-Aev" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kGq-RU-97P"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="2gB-qd-sZF"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="2gB-qd-sZF">
+                        <color key="badgeColor" name="YPWhite"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" id="GgK-74-3eX"/>
                     <connections>
                         <outlet property="tableView" destination="sVu-5g-Aev" id="rBG-Gd-ohp"/>
@@ -121,7 +123,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Yt-Vf-OVw">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="YPBlack"/>
                         <color key="tintColor" name="YPWhite"/>
                         <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <tabBarAppearance key="standardAppearance">
