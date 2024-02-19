@@ -18,7 +18,7 @@ class OAuth2TokenStorage {
         }
     }
     
-    func saveToken (token: String) {
+    func save(token: String) {
         self.token = token
     }
 }

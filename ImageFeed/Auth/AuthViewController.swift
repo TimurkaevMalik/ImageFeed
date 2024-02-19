@@ -35,28 +35,21 @@ extension AuthViewController: WebViewViewControllerDelegate {
         let storage = OAuth2TokenStorage()
         let networkClient = OAuth2Service()
         
-        delegate?.authViewController(self, didAuthenticateWithCode: code)
-        
-        func loadData(handler: @escaping (Result<OAuthTokenResponseBody, Error>) -> Void) {
-            networkClient.fetchAuthToken(code: code) { result in
+        func loadData() {
+            networkClient.fetchOAuthToken(code: code) { result in
                 
-                switch result {
-                case .success(let data):
-                    do {
-                        let decodedData = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                        handler(.success(decodedData))
-                        
-                        storage.saveToken(token: decodedData.accessToken)
-                        print(decodedData.accessToken + "🚫🚫🚫")
-                    } catch {
-                        handler(.failure(error))
-                    }
+                switch result{
+                case .success(let accessToken):
+                    storage.save(token: accessToken)
                     
-                case .failure(let error):
-                    handler(.failure(error))
+                case .failure:
+                    print("Failure while loading data")
                 }
             }
         }
+        
+        loadData()
+        delegate?.authViewController(self, didAuthenticateWithCode: code)
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {

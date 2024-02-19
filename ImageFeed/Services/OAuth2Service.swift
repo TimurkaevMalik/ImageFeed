@@ -13,7 +13,7 @@ class OAuth2Service {
         case codeError
     }
     
-    func fetchAuthToken(code: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         
         var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token")
         
@@ -21,14 +21,16 @@ class OAuth2Service {
         URLQueryItem(name: "client_id", value: AccessKey),
         URLQueryItem(name: "client_secret", value: SecretKey),
         URLQueryItem(name: "redirect_uri", value: RedirectURI),
-        URLQueryItem(name: "code", value: "code"),
+        URLQueryItem(name: "code", value: code),
         URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
         
         guard let url = urlComponents?.url else {return}
         
-        let request = URLRequest(url: url)
+        var request = URLRequest(url: url)
 
+        request.httpMethod = "POST"
+        
         DispatchQueue.main.async {
             
             let session: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -42,10 +44,14 @@ class OAuth2Service {
                     completion(.failure(NetworkError.codeError))
                 }
                 
-                guard let data = data else {return}
-                completion(.success(data))
-                
-                print(data)
+                if let data = data {
+                    do {
+                        let decodedData = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
+                        completion(.success(decodedData.accessToken))
+                    } catch {
+                        completion(.failure(error))
+                    }
+                }
             }
             
             session.resume()
