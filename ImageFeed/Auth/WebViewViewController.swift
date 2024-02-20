@@ -9,12 +9,12 @@ import WebKit
 import UIKit
 
 final class WebViewViewController: UIViewController {
-  
+    
     @IBOutlet private var webView: WKWebView!
     @IBOutlet private var progressView: UIProgressView!
     
     weak var delegate: WebViewViewControllerDelegate?
-      
+    
     
     func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
@@ -22,6 +22,21 @@ final class WebViewViewController: UIViewController {
         print(Float(webView.estimatedProgress))
     }
     
+    func webViewRequest(url: String) {
+        
+        guard var urlComponents = URLComponents(string: url) else {return}
+        
+        urlComponents.queryItems = [
+            URLQueryItem(name: "client_id", value: AccessKey),
+            URLQueryItem(name: "redirect_uri", value: RedirectURI),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: AccessScope)
+        ]
+        guard let url = urlComponents.url else {return}
+        
+        let urlRquest = URLRequest(url: url)
+        webView.load(urlRquest)
+    }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(WKWebView.estimatedProgress) {
@@ -46,17 +61,7 @@ final class WebViewViewController: UIViewController {
         
         webView.navigationDelegate = self
         
-        var urlComponents = URLComponents(string: "https://unsplash.com/oauth/authorize")!
-        urlComponents.queryItems = [
-           URLQueryItem(name: "client_id", value: AccessKey),
-           URLQueryItem(name: "redirect_uri", value: RedirectURI),
-           URLQueryItem(name: "response_type", value: "code"),
-           URLQueryItem(name: "scope", value: AccessScope)
-         ]
-         let url = urlComponents.url!
-         let urlRquest = URLRequest(url: url)
-        webView.load(urlRquest)
-        
+        webViewRequest(url: "https://unsplash.com/oauth/authorize")
         updateProgress()
     }
     
@@ -84,7 +89,7 @@ extension WebViewViewController: WKNavigationDelegate {
         _ webView: WKWebView,
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
+            
             if let code = code(from: navigationAction){
                 
                 delegate?.webViewViewController(self, didAuthenticateWithCode: code)
@@ -93,7 +98,7 @@ extension WebViewViewController: WKNavigationDelegate {
             } else {
                 decisionHandler(.allow)
             }
-    }
+        }
     
     func code(from navigationAction: WKNavigationAction) -> String? {
         
@@ -102,7 +107,7 @@ extension WebViewViewController: WKNavigationDelegate {
             let urlComponents = URLComponents(string: url.absoluteString),
             urlComponents.path == "/oauth/authorize/native",
             let items = urlComponents.queryItems,
-            let codeItem = items.first(where: {$0.name == "code"}) 
+            let codeItem = items.first(where: {$0.name == "code"})
         {
             return codeItem.value
         } else {

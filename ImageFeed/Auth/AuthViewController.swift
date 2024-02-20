@@ -15,13 +15,15 @@ class AuthViewController: UIViewController {
     
     weak var delegate: AuthViewControllerDelegate?
     
-    let SegueIdentifier = "ShowWebView"
+    private let showAuthWebViewSegueIdentifier = "ShowWebView"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == SegueIdentifier {
-        guard
-            let webViewViewController = segue.destination as? WebViewViewController else { fatalError("Failed to prepare for \(SegueIdentifier)")}
+        if segue.identifier == showAuthWebViewSegueIdentifier {
+            guard
+                let webViewViewController = segue.destination as? WebViewViewController else {
+                return assertionFailure("Failed to prepare for \(showAuthWebViewSegueIdentifier)")}
+            
             webViewViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
@@ -32,25 +34,10 @@ class AuthViewController: UIViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String){
         
-        let storage = OAuth2TokenStorage()
-        let networkClient = OAuth2Service()
         
-        func loadData() {
-            networkClient.fetchOAuthToken(code: code) { result in
-                
-                switch result{
-                case .success(let accessToken):
-                    storage.save(token: accessToken)
-                    
-                case .failure:
-                    print("Failure while loading data")
-                }
-            }
-        }
-        
-        loadData()
         delegate?.authViewController(self, didAuthenticateWithCode: code)
     }
+    
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         dismiss(animated: true)

@@ -9,11 +9,11 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    private let avatarImageView = UIImageView()
-    private let nameLabel = UILabel()
-    private let loginNameLabel = UILabel()
-    private let descriptionLabel = UILabel()
-    private var logoutButton = UIButton()
+    private lazy var avatarImageView = UIImageView()
+    private lazy var nameLabel = UILabel()
+    private lazy var loginNameLabel = UILabel()
+    private lazy var descriptionLabel = UILabel()
+    private lazy var logoutButton = UIButton()
     
     
     private func createProfileScreenWithViews() {
