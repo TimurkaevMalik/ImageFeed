@@ -35,23 +35,26 @@ class OAuth2Service {
         
         let session: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            if let respose = response as? HTTPURLResponse, respose.statusCode < 200 || respose.statusCode >= 300 {
-                completion(.failure(NetworkError.codeError))
-            }
-            
-            if let data = data {
-                do {
-                    let decodedData = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                    
-                    oauth2ServiceStorage.save(token: decodedData.accessToken)
-                    completion(.success(decodedData.accessToken))
-                } catch {
+            DispatchQueue.main.async {
+                
+                if let error = error {
                     completion(.failure(error))
+                    return
+                }
+                
+                if let respose = response as? HTTPURLResponse, respose.statusCode < 200 || respose.statusCode >= 300 {
+                    completion(.failure(NetworkError.codeError))
+                }
+                
+                if let data = data {
+                    do {
+                        let decodedData = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
+                        
+                        oauth2ServiceStorage.save(token: decodedData.accessToken)
+                        completion(.success(decodedData.accessToken))
+                    } catch {
+                        completion(.failure(error))
+                    }
                 }
             }
         }

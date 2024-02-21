@@ -15,14 +15,12 @@ final class SplashViewController: UIViewController {
     
     
     private func switchToTabBarController() {
-        DispatchQueue.main.async {
-            
-            guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
-            
-            let tabBarController = UIStoryboard(name: "Main" , bundle: .main).instantiateViewController(identifier: "TabBarViewController")
-            
-            window.rootViewController = tabBarController
-        }
+        
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        
+        let tabBarController = UIStoryboard(name: "Main" , bundle: .main).instantiateViewController(identifier: "TabBarViewController")
+        
+        window.rootViewController = tabBarController
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,18 +62,16 @@ extension SplashViewController: AuthViewControllerDelegate {
     }
     
     func fetchToken(code: String){
-        DispatchQueue.main.async {
-            
+        
         self.oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
-                
-                guard let self = self else {return}
-                
-                switch result{
-                case .success:
-                    self.switchToTabBarController()
-                case .failure:
-                    break
-                }
+            
+            guard let self = self else {return}
+            
+            switch result{
+            case .success:
+                self.switchToTabBarController()
+            case .failure:
+                break
             }
         }
     }
