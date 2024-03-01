@@ -9,6 +9,10 @@ import UIKit
 
 final class SplashViewController: UIViewController {
     
+    
+    private var alertPresenter = AlertPresenter()
+    private let profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     private let oauth2Service = OAuth2Service()
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let ShowAuthenticationScreenIdentifier = "ShowAuthenticationScreen"
@@ -41,7 +45,9 @@ final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+//        oauth2TokenStorage.token = nil
         if let token = oauth2TokenStorage.token {
+            fetchProfileInfo(token: token)
             switchToTabBarController()
         } else {
             performSegue(withIdentifier: ShowAuthenticationScreenIdentifier, sender: nil)
@@ -57,6 +63,7 @@ extension SplashViewController: AuthViewControllerDelegate {
         dismiss(animated: true) { [weak self] in
             guard let self = self else {return}
             
+            UIBlockingProgressHUD.show()
             fetchToken(code: code)
         }
     }
@@ -69,9 +76,59 @@ extension SplashViewController: AuthViewControllerDelegate {
             
             switch result{
             case .success:
-                self.switchToTabBarController()
+                guard let token = oauth2TokenStorage.token else {return}
+                self.fetchProfileInfo(token: token)
+
+                print("Token was saved")
+                
             case .failure:
                 break
+            }
+        }
+    }
+    
+    func fetchProfileInfo(token: String) {
+        profileService.fecthProfile(token) { [weak self] result in
+            
+            UIBlockingProgressHUD.dismiss()
+
+            guard let self = self else {return}
+            
+            switch result{
+            case .success:
+                self.switchToTabBarController()
+                self.fetchImageURL(token: token)
+                print("profile info was received")
+                
+            case .failure(let error):
+                self.alertPresenter.showAlert(vc: self, result: AlertModel(
+                    message: "An error occurred while receiving profile information: \(error)",
+                    title: "Error",
+                    buttonText: "Try again",
+                    completion: {
+                        
+                    UIBlockingProgressHUD.show()
+                    self.fetchProfileInfo(token: token)
+                }))
+                break
+            }
+        }
+    }
+    
+    func fetchImageURL(token: String){
+        
+        guard let username = profileService.profile?.userName else {
+            print("username - nil")
+            return
+        }
+        print(username)
+        profileImageService.fetchProfileImageURL(token: token ,username: username) { result in
+            
+            switch result {
+            case .success(let url):
+                print(url)
+            case .failure(let error):
+                print("FAILURE")
             }
         }
     }

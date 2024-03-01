@@ -9,6 +9,11 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    private let profileImageService = ProfileImageService.shared
+    
+    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let profileService = ProfileService.shared
+    
     private lazy var avatarImageView = UIImageView()
     private lazy var nameLabel = UILabel()
     private lazy var loginNameLabel = UILabel()
@@ -20,10 +25,12 @@ final class ProfileViewController: UIViewController {
         logoutButton = UIButton.systemButton(with: UIImage(named: "logout_button")!, target: self, action: #selector(didTapLogoutButton))
         avatarImageView.image = UIImage(named: "Avatar_Image")
         
-        nameLabel.text = "Екатерина Новикова"
-        loginNameLabel.text = "@ekaterina_nov"
-        descriptionLabel.text = "Hello, world"
-        
+
+        if let profile = profileService.profile {
+            updateProfileDetails(profile: profile)
+        } else {
+            print("profileService.profile is empty")
+        }
         
         nameLabel.textColor = UIColor(named: "YPWhite")
         logoutButton.tintColor = UIColor(named: "YPRed")
@@ -32,7 +39,7 @@ final class ProfileViewController: UIViewController {
         nameLabel.font = UIFont.boldSystemFont(ofSize: 23)
         loginNameLabel.font = UIFont.systemFont(ofSize: 13)
         descriptionLabel.font = UIFont.systemFont(ofSize: 13)
-
+        
         
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -69,6 +76,14 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
+    func updateProfileDetails(profile: Profile) {
+        
+//        avatarImageView.image = 
+        nameLabel.text = profile.name
+        loginNameLabel.text = "@\(profile.userName)"
+        descriptionLabel.text = profile.bio
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +93,21 @@ final class ProfileViewController: UIViewController {
     
     
     @objc func didTapLogoutButton() {
+        print("did tap logoutButton button")
         
-        print("did tap logout button")
+        guard let username = profileService.profile?.userName else {
+            print("username - nil")
+            return
+        }
+        print(username)
+        profileImageService.fetchProfileImageURL(token: " ", username: username) { result in
+            
+            switch result {
+            case .success(let url):
+                print(url)
+            case .failure(let error):
+                print("error")
+            }
+        }
     }
 }
