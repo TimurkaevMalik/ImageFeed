@@ -9,9 +9,9 @@ import UIKit
 
 final class ProfileService {
     
-    var profile: Profile?
-    
+    private(set) var profile: Profile?
     static let shared = ProfileService()
+    
     private var task: URLSessionTask?
     let oauth2TokenStorage = OAuth2TokenStorage()
     
@@ -19,6 +19,7 @@ final class ProfileService {
     
     private enum ProfileServiceError: Error {
         case codeError
+        case responseError
         case invalidRequest
     }
     
@@ -28,7 +29,6 @@ final class ProfileService {
         
         if task != nil {
             task?.cancel()
-            return
         }
         
         guard let request = makeRequstBody(token: token) else {
@@ -36,8 +36,7 @@ final class ProfileService {
             return
         }
         
-        let session: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
-            
+        let session: URLSessionDataTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             
             DispatchQueue.main.async { [weak self] in
                 
@@ -50,7 +49,7 @@ final class ProfileService {
                 
                 if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode  >= 300 {
                     
-                    completion(.failure(ProfileServiceError.codeError))
+                    completion(.failure(ProfileServiceError.responseError))
                     return
                 }
                 
@@ -66,8 +65,8 @@ final class ProfileService {
                         completion(.failure(ProfileServiceError.codeError))
                     }
                 }
+                self.task = nil
             }
-            self.task = nil
         }
         
         task = session

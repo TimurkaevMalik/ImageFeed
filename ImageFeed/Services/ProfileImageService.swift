@@ -9,19 +9,27 @@ import UIKit
 
 final class ProfileImageService {
     
-    static let shared = ProfileImageService()
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
+
     private(set) var avatarURL: String?
+    static let shared = ProfileImageService()
+    private var task: URLSessionTask?
     
     private init(){}
     
     private enum PrProfileImageServiceError: Error {
         case codeError
+        case responseError
         case invalidRequest
     }
     
     func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String,Error>) -> Void){
         
+        assert(Thread.isMainThread)
+
+        if task != nil {
+            task?.cancel()
+        }
         
         guard let request = makeRequestBody(token: token, username: username) else {
             completion(.failure(PrProfileImageServiceError.codeError))
@@ -33,33 +41,43 @@ final class ProfileImageService {
             DispatchQueue.main.async {
                 
                 guard let self = self else {return}
-                
+
                 if let error = error {
                     completion(.failure(error))
                 }
                 
                 if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
                     print(response.statusCode)
-                    completion(.failure(PrProfileImageServiceError.codeError))
+                    completion(.failure(PrProfileImageServiceError.responseError))
                 }
                 
                 if let data = data {
                     do {
                         let profileImageURL = try? JSONDecoder().decode(UserResult.self, from: data)
-                        guard let imageURL = profileImageURL?.profileImage["small"] else {return}
-                        print(imageURL)
-                        self.avatarURL = imageURL
+                        
+                        guard let profileImageURL = profileImageURL else {return}
+                        
+                        self.avatarURL = profileImageURL.profileImage.small
+                        
+                        completion(.success((profileImageURL.profileImage.small)))
+                        
+                        NotificationCenter.default.post(
+                            name: ProfileImageService.didChangeNotification,
+                            object: self,
+                            userInfo: ["URL": profileImageURL.profileImage])
                     }
                 }
+                self.task = nil
             }
         }
         
+        task = session
         session.resume()
     }
     
     func makeRequestBody(token: String, username: String) -> URLRequest? {
         
-        guard let url = URL(string: "https://api.unsplash.com/users/malik_timurkaev") else {
+        guard let url = URL(string: "https://api.unsplash.com/users/\(username)") else {
             assertionFailure("Failed to create  URL")
             return nil
         }

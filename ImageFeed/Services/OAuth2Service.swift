@@ -11,6 +11,7 @@ class OAuth2Service {
     
     private enum AuthServiceError: Error {
         case codeError
+        case responseError
         case invalidRequest
     }
     
@@ -55,7 +56,7 @@ class OAuth2Service {
                 }
                 
                 if let respose = response as? HTTPURLResponse, respose.statusCode < 200 || respose.statusCode >= 300 {
-                    completion(.failure(AuthServiceError.codeError))
+                    completion(.failure(AuthServiceError.responseError))
                 }
                 
                 if let data = data {

@@ -47,8 +47,8 @@ final class SplashViewController: UIViewController {
         
 //        oauth2TokenStorage.token = nil
         if let token = oauth2TokenStorage.token {
+
             fetchProfileInfo(token: token)
-            switchToTabBarController()
         } else {
             performSegue(withIdentifier: ShowAuthenticationScreenIdentifier, sender: nil)
         }
@@ -78,8 +78,6 @@ extension SplashViewController: AuthViewControllerDelegate {
             case .success:
                 guard let token = oauth2TokenStorage.token else {return}
                 self.fetchProfileInfo(token: token)
-
-                print("Token was saved")
                 
             case .failure:
                 break
@@ -92,23 +90,24 @@ extension SplashViewController: AuthViewControllerDelegate {
             
             UIBlockingProgressHUD.dismiss()
 
-            guard let self = self else {return}
+            guard let self = self else {
+                return
+                      }
             
             switch result{
             case .success:
-                self.switchToTabBarController()
                 self.fetchImageURL(token: token)
-                print("profile info was received")
+                self.switchToTabBarController()
                 
             case .failure(let error):
                 self.alertPresenter.showAlert(vc: self, result: AlertModel(
-                    message: "An error occurred while receiving profile information: \(error)",
-                    title: "Error",
+                    message: "An error occurred while receiving profile information",
+                    title: "\(error)",
                     buttonText: "Try again",
                     completion: {
                         
                     UIBlockingProgressHUD.show()
-                    self.fetchProfileInfo(token: token)
+                    self.fetchProfileInfo(token: self.oauth2TokenStorage.token!)
                 }))
                 break
             }
@@ -117,18 +116,16 @@ extension SplashViewController: AuthViewControllerDelegate {
     
     func fetchImageURL(token: String){
         
-        guard let username = profileService.profile?.userName else {
-            print("username - nil")
-            return
-        }
-        print(username)
-        profileImageService.fetchProfileImageURL(token: token ,username: username) { result in
+        guard let username = profileService.profile?.userName else {return}
+        
+        profileImageService.fetchProfileImageURL(token: token, username: username) { result in
             
             switch result {
-            case .success(let url):
-                print(url)
-            case .failure(let error):
-                print("FAILURE")
+            case .success:
+                break
+                
+            case .failure:
+                print("failure while recieving imageURL")
             }
         }
     }

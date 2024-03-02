@@ -21,6 +21,5 @@ struct Profile {
         self.firstName = result.firstName
         self.lastName = result.lastName
         self.bio = result.bio
-//        self.name = result.firstName + " " + result.lastName
     }
 }

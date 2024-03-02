@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
+    private var profileImageServeceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
     
     private let oauth2TokenStorage = OAuth2TokenStorage()
@@ -23,11 +25,16 @@ final class ProfileViewController: UIViewController {
     
     private func createProfileScreenWithViews() {
         logoutButton = UIButton.systemButton(with: UIImage(named: "logout_button")!, target: self, action: #selector(didTapLogoutButton))
-        avatarImageView.image = UIImage(named: "Avatar_Image")
         
-
-        if let profile = profileService.profile {
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.cornerRadius = 33
+        
+        
+        if let profile = profileService.profile,
+           profileImageService.avatarURL != nil
+        {
             updateProfileDetails(profile: profile)
+            updateAvatar()
         } else {
             print("profileService.profile is empty")
         }
@@ -78,15 +85,33 @@ final class ProfileViewController: UIViewController {
     
     func updateProfileDetails(profile: Profile) {
         
-//        avatarImageView.image = 
         nameLabel.text = profile.name
         loginNameLabel.text = "@\(profile.userName)"
         descriptionLabel.text = profile.bio
     }
     
+    private func updateAvatar() {
+        guard let profileImageURL = profileImageService.avatarURL,
+              let url = URL(string: profileImageURL)
+        else {return}
+        
+        avatarImageView.kf.setImage(with: url)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        profileImageServeceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main,
+            using: { [weak self] _ in
+                guard let self = self else {
+                    return
+                }
+                self.updateAvatar()
+            })
         
         createProfileScreenWithViews()
     }
@@ -94,20 +119,5 @@ final class ProfileViewController: UIViewController {
     
     @objc func didTapLogoutButton() {
         print("did tap logoutButton button")
-        
-        guard let username = profileService.profile?.userName else {
-            print("username - nil")
-            return
-        }
-        print(username)
-        profileImageService.fetchProfileImageURL(token: " ", username: username) { result in
-            
-            switch result {
-            case .success(let url):
-                print(url)
-            case .failure(let error):
-                print("error")
-            }
-        }
     }
 }

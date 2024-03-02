@@ -69,7 +69,8 @@ final class WebViewViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         webView.removeObserver(
-            self, forKeyPath: #keyPath(WKWebView.estimatedProgress),
+            self, 
+            forKeyPath: #keyPath(WKWebView.estimatedProgress),
             context: nil)
     }
     
