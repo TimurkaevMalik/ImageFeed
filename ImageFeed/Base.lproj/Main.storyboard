@@ -98,28 +98,10 @@
             </objects>
             <point key="canvasLocation" x="79.710144927536234" y="-682.36607142857144"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="kna-pN-ySV">
-            <objects>
-                <viewController storyboardIdentifier="ProfileViewController" title="Profile" id="fWc-SW-OF1" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pMF-m4-ESY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="5W3-05-h3g"/>
-                        <color key="backgroundColor" name="YPBlack"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="eta-hd-nNe">
-                        <color key="badgeColor" name="YPWhite"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qxJ-SK-2dO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="81.159420289855078" y="-2.0089285714285712"/>
-        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="OVr-Pp-rja">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarViewController" id="GKf-y6-ROK" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" id="GKf-y6-ROK" customClass="TabBarController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Yt-Vf-OVw">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -130,10 +112,6 @@
                             <color key="backgroundColor" name="YPBlack"/>
                         </tabBarAppearance>
                     </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Gda-M1-r9m"/>
-                        <segue destination="fWc-SW-OF1" kind="relationship" relationship="viewControllers" id="gHC-zT-PTX"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6WC-Ke-ewg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -382,7 +360,6 @@
         <image name="redLike" width="30" height="28"/>
         <image name="share_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="30" height="30"/>
-        <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YPBlack">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -24,6 +24,9 @@ final class ProfileViewController: UIViewController {
     
     
     private func createProfileScreenWithViews() {
+        
+        view.backgroundColor = UIColor(named: "YPBlack")
+        
         logoutButton = UIButton.systemButton(with: UIImage(named: "logout_button")!, target: self, action: #selector(didTapLogoutButton))
         
         avatarImageView.layer.masksToBounds = true
