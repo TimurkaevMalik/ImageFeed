@@ -45,9 +45,9 @@ final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        oauth2TokenStorage.token = nil
+        //        oauth2TokenStorage.token = nil
         if let token = oauth2TokenStorage.token {
-
+            
             fetchProfileInfo(token: token)
         } else {
             performSegue(withIdentifier: ShowAuthenticationScreenIdentifier, sender: nil)
@@ -89,10 +89,10 @@ extension SplashViewController: AuthViewControllerDelegate {
         profileService.fecthProfile(token) { [weak self] result in
             
             UIBlockingProgressHUD.dismiss()
-
+            
             guard let self = self else {
                 return
-                      }
+            }
             
             switch result{
             case .success:
@@ -106,9 +106,9 @@ extension SplashViewController: AuthViewControllerDelegate {
                     buttonText: "Try again",
                     completion: {
                         
-                    UIBlockingProgressHUD.show()
-                    self.fetchProfileInfo(token: self.oauth2TokenStorage.token!)
-                }))
+                        UIBlockingProgressHUD.show()
+                        self.fetchProfileInfo(token: self.oauth2TokenStorage.token!)
+                    }))
                 break
             }
         }

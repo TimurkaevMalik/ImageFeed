@@ -18,11 +18,3 @@ struct UserResult: Codable {
 struct Image: Codable{
     var small: String
 }
-
-struct ImageURL {
-    var theURL: String
-    
-    init(theURL: String) {
-        self.theURL = theURL
-    }
-}

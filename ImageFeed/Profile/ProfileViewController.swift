@@ -30,13 +30,16 @@ final class ProfileViewController: UIViewController {
         avatarImageView.layer.cornerRadius = 33
         
         
-        if let profile = profileService.profile,
-           profileImageService.avatarURL != nil
-        {
+        if let profile = profileService.profile {
             updateProfileDetails(profile: profile)
+        } else {
+            print("variable profileService.profile is empty")
+        }
+        
+        if profileImageService.avatarURL != nil {
             updateAvatar()
         } else {
-            print("profileService.profile is empty")
+            print("variable profileImageService.avatarURL is empty")
         }
         
         nameLabel.textColor = UIColor(named: "YPWhite")
@@ -95,13 +98,15 @@ final class ProfileViewController: UIViewController {
               let url = URL(string: profileImageURL)
         else {return}
         
-        avatarImageView.kf.setImage(with: url)
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        
+        avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.processor(processor)])
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         profileImageServeceObserver = NotificationCenter.default.addObserver(
             forName: ProfileImageService.didChangeNotification,
             object: nil,

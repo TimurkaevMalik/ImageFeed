@@ -10,9 +10,9 @@ import UIKit
 final class ProfileImageService {
     
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
-
-    private(set) var avatarURL: String?
+    
     static let shared = ProfileImageService()
+    private(set) var avatarURL: String?
     private var task: URLSessionTask?
     
     private init(){}
@@ -26,7 +26,7 @@ final class ProfileImageService {
     func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String,Error>) -> Void){
         
         assert(Thread.isMainThread)
-
+        
         if task != nil {
             task?.cancel()
         }
@@ -41,7 +41,7 @@ final class ProfileImageService {
             DispatchQueue.main.async {
                 
                 guard let self = self else {return}
-
+                
                 if let error = error {
                     completion(.failure(error))
                 }

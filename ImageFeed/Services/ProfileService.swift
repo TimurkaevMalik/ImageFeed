@@ -41,7 +41,7 @@ final class ProfileService {
             DispatchQueue.main.async { [weak self] in
                 
                 guard let self = self else {return}
-
+                
                 if let error = error {
                     completion(.failure(error))
                     return
@@ -59,7 +59,7 @@ final class ProfileService {
                         let profileResultInfo = try JSONDecoder().decode(ProfileResult.self, from: data)
                         let profile = Profile(profileResultInfo)
                         self.profile = profile
-
+                        
                         completion(.success(profile))
                     } catch {
                         completion(.failure(ProfileServiceError.codeError))
@@ -74,7 +74,7 @@ final class ProfileService {
     }
     
     func makeRequstBody(token: String) -> URLRequest? {
-
+        
         guard let url = URL(string: "https://api.unsplash.com/me") else {
             assertionFailure("Failed to create URL")
             return nil
