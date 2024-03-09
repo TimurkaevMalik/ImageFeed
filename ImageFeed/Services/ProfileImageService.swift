@@ -17,7 +17,7 @@ final class ProfileImageService {
     
     private init(){}
     
-    private enum PrProfileImageServiceError: Error {
+    private enum ProfileImageServiceError: Error {
         case codeError
         case responseError
         case invalidRequest
@@ -32,7 +32,7 @@ final class ProfileImageService {
         }
         
         guard let request = makeRequestBody(token: token, username: username) else {
-            completion(.failure(PrProfileImageServiceError.codeError))
+            completion(.failure(ProfileImageServiceError.codeError))
             return
         }
         
@@ -48,7 +48,7 @@ final class ProfileImageService {
                 
                 if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
                     print(response.statusCode)
-                    completion(.failure(PrProfileImageServiceError.responseError))
+                    completion(.failure(ProfileImageServiceError.responseError))
                 }
                 
                 if let data = data {
