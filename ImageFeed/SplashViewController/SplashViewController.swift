@@ -9,48 +9,63 @@ import UIKit
 
 final class SplashViewController: UIViewController {
     
-    
+    private lazy var logoImage = UIImageView()
     private var alertPresenter = AlertPresenter()
     private let profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     private let oauth2Service = OAuth2Service()
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let ShowAuthenticationScreenIdentifier = "ShowAuthenticationScreen"
+    private var fetchingTask: Int?
     
+    private func makeSplashViewControllerScreen(){
+        view.backgroundColor = UIColor(named: "YPBlack")
+        logoImage.image = UIImage(named: "Vector")
+        
+        logoImage.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(logoImage)
+        
+        NSLayoutConstraint.activate([
+            logoImage.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            logoImage.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)
+        ])
+    }
     
     private func switchToTabBarController() {
         
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         
-        let tabBarController = UIStoryboard(name: "Main" , bundle: .main).instantiateViewController(identifier: "TabBarViewController")
+        let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(identifier: "TabBarViewController")
         
         window.rootViewController = tabBarController
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    private func switchToAuthViewController() {
+                
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if segue.identifier == ShowAuthenticationScreenIdentifier {
-            
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else { fatalError("Failed to prepare for \(ShowAuthenticationScreenIdentifier)")}
-            
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController else {
+            fatalError("Failed of initializing storyboard to viewCOntroller")
         }
+        
+        viewController.delegate = self
+        viewController.modalPresentationStyle = .fullScreen
+        
+        present(viewController, animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //        oauth2TokenStorage.token = nil
+        makeSplashViewControllerScreen()
+        
+        guard fetchingTask == nil else {return}
+        
         if let token = oauth2TokenStorage.token {
             
             fetchProfileInfo(token: token)
         } else {
-            performSegue(withIdentifier: ShowAuthenticationScreenIdentifier, sender: nil)
+            switchToAuthViewController()
         }
     }
 }
@@ -59,7 +74,7 @@ final class SplashViewController: UIViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        
+        fetchingTask = 1
         dismiss(animated: true) { [weak self] in
             guard let self = self else {return}
             
@@ -71,9 +86,8 @@ extension SplashViewController: AuthViewControllerDelegate {
     func fetchToken(code: String){
         
         self.oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
-            
             guard let self = self else {return}
-            
+
             switch result{
             case .success:
                 guard let token = oauth2TokenStorage.token else {return}
@@ -101,9 +115,9 @@ extension SplashViewController: AuthViewControllerDelegate {
                 
             case .failure(let error):
                 self.alertPresenter.showAlert(vc: self, result: AlertModel(
-                    message: "An error occurred while receiving profile information",
-                    title: "\(error)",
-                    buttonText: "Try again",
+                    message: "Не удалось войти в систему",
+                    title: "Что-то пошло не так",
+                    buttonText: "Ок",
                     completion: {
                         
                         UIBlockingProgressHUD.show()
@@ -118,15 +132,6 @@ extension SplashViewController: AuthViewControllerDelegate {
         
         guard let username = profileService.profile?.userName else {return}
         
-        profileImageService.fetchProfileImageURL(token: token, username: username) { result in
-            
-            switch result {
-            case .success:
-                break
-                
-            case .failure:
-                print("failure while recieving imageURL")
-            }
-        }
+        profileImageService.fetchProfileImageURL(token: token, username: username) {_ in}
     }
 }
