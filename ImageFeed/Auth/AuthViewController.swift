@@ -13,9 +13,38 @@ protocol AuthViewControllerDelegate: AnyObject {
 
 class AuthViewController: UIViewController {
     
+    private var alertPresenter = AlertPresenter()
+    private let oauth2Service = OAuth2Service()
+    private let oauth2TokenStorage = OAuth2TokenStorage()
+    
     weak var delegate: AuthViewControllerDelegate?
     
     private let showAuthWebViewSegueIdentifier = "ShowWebView"
+    
+    func fetchToken(code: String){
+        UIBlockingProgressHUD.show()
+        
+        oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
+            guard let self = self else {return}
+            
+            switch result{
+            case .success:
+                self.delegate?.authViewController(self, didAuthenticateWithCode: code)
+                
+            case .failure:
+                UIBlockingProgressHUD.dismiss()
+                
+                self.alertPresenter.showAlert(vc: self, result: AlertModel(
+                    message: "Не удалось войти в систему",
+                    title: "Что-то пошло не так",
+                    buttonText: "Ок", completion: {
+                        print("OK TAPPED")
+                    }
+                ))
+                break
+            }
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -34,8 +63,8 @@ class AuthViewController: UIViewController {
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String){
         
-        
-        delegate?.authViewController(self, didAuthenticateWithCode: code)
+        vc.dismiss(animated: true)
+        fetchToken(code: code)
     }
     
     

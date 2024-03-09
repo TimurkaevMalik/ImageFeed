@@ -83,22 +83,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BC2FD1A72B62BFD400EB39BA /* SingleImageView */ = {
-			isa = PBXGroup;
-			children = (
-				BC2FD1A52B62BC4800EB39BA /* SingleImageViewController.swift */,
-			);
-			path = SingleImageView;
-			sourceTree = "<group>";
-		};
-		BC323E502B5F912B00F034EA /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				BC323E512B5F919100F034EA /* ProfileViewController.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
 		BC340B2B2B489926008780C8 = {
 			isa = PBXGroup;
 			children = (
@@ -119,11 +103,9 @@
 			isa = PBXGroup;
 			children = (
 				BCA435A92B991BBA00A8C541 /* ViewControllers */,
-				BC323E502B5F912B00F034EA /* Profile */,
 				BC4393D02B83F08D00AD96F5 /* SplashViewController */,
 				BC87DE6C2B8379B300AC8C19 /* Services */,
 				BC87DE692B83761C00AC8C19 /* Models */,
-				BC2FD1A72B62BFD400EB39BA /* SingleImageView */,
 				BCE232C92B57BF3A0006483E /* imageList */,
 				BCDFF33F2B762DD300B99B7D /* Auth */,
 				BC340B372B489926008780C8 /* AppDelegate.swift */,
@@ -173,6 +155,8 @@
 		BCA435A92B991BBA00A8C541 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BC323E512B5F919100F034EA /* ProfileViewController.swift */,
+				BC2FD1A52B62BC4800EB39BA /* SingleImageViewController.swift */,
 				BCA435AA2B991BCF00A8C541 /* TabBarController.swift */,
 			);
 			path = ViewControllers;
