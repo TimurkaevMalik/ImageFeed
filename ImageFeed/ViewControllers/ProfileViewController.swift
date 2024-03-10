@@ -30,8 +30,7 @@ final class ProfileViewController: UIViewController {
         logoutButton = UIButton.systemButton(with: UIImage(named: "logout_button")!, target: self, action: #selector(didTapLogoutButton))
         
         avatarImageView.layer.masksToBounds = true
-        avatarImageView.layer.cornerRadius = 33
-        
+        avatarImageView.layer.cornerRadius = 35
         
         if let profile = profileService.profile {
             updateProfileDetails(profile: profile)
@@ -101,7 +100,7 @@ final class ProfileViewController: UIViewController {
               let url = URL(string: profileImageURL)
         else {return}
         
-        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        let processor = RoundCornerImageProcessor(cornerRadius: 450)
         
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.processor(processor)])
     }
@@ -115,10 +114,8 @@ final class ProfileViewController: UIViewController {
             object: nil,
             queue: .main,
             using: { [weak self] _ in
-                guard let self = self else {
-                    return
-                }
-                self.updateAvatar()
+                
+                self?.updateAvatar()
             })
         
         createProfileScreenWithViews()

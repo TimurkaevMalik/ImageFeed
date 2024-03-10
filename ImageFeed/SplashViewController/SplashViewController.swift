@@ -43,7 +43,9 @@ final class SplashViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController else {
-            fatalError("Failed of initializing storyboard to viewCOntroller")
+            
+            assertionFailure("Failed of initializing storyboard to viewCOntroller")
+            return
         }
         
         viewController.delegate = self
