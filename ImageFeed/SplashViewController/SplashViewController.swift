@@ -82,7 +82,7 @@ final class SplashViewController: UIViewController {
         }
     }
     
-    func fetchImageURL(token: String){
+    private func fetchImageURL(token: String){
         
         guard let username = profileService.profile?.userName else {return}
         

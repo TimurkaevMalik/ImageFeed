@@ -16,10 +16,10 @@ class AuthViewController: UIViewController {
     private var alertPresenter = AlertPresenter()
     private let oauth2Service = OAuth2Service()
     private let oauth2TokenStorage = OAuth2TokenStorage()
-    
+    private let showAuthWebViewSegueIdentifier = "ShowWebView"
+
     weak var delegate: AuthViewControllerDelegate?
     
-    private let showAuthWebViewSegueIdentifier = "ShowWebView"
     
     private func fetchToken(code: String){
         UIBlockingProgressHUD.show()
