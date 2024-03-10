@@ -21,7 +21,7 @@ class AuthViewController: UIViewController {
     
     private let showAuthWebViewSegueIdentifier = "ShowWebView"
     
-    func fetchToken(code: String){
+    private func fetchToken(code: String){
         UIBlockingProgressHUD.show()
         
         oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
@@ -37,9 +37,7 @@ class AuthViewController: UIViewController {
                 self.alertPresenter.showAlert(vc: self, result: AlertModel(
                     message: "Не удалось войти в систему",
                     title: "Что-то пошло не так",
-                    buttonText: "Ок", completion: {
-                        print("OK TAPPED")
-                    }
+                    buttonText: "Ок", completion: {}
                 ))
                 break
             }

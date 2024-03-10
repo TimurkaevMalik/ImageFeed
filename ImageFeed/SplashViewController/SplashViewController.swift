@@ -15,6 +15,7 @@ final class SplashViewController: UIViewController {
     private let profileImageService = ProfileImageService.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     
+    
     private func makeSplashViewControllerScreen(){
         view.backgroundColor = UIColor(named: "YPBlack")
         logoImage.image = UIImage(named: "Vector")
@@ -28,7 +29,7 @@ final class SplashViewController: UIViewController {
         ])
     }
     
-    func switchToTabBarController() {
+    private func switchToTabBarController() {
         
         guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
         
@@ -51,32 +52,7 @@ final class SplashViewController: UIViewController {
         present(viewController, animated: true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        makeSplashViewControllerScreen()
-        
-        if let token = oauth2TokenStorage.token {
-            
-            fetchProfileInfo(token: token)
-        } else {
-            switchToAuthViewController()
-        }
-    }
-}
-
-
-extension SplashViewController: AuthViewControllerDelegate {
-    
-    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        dismiss(animated: true)
-        
-        guard let token = oauth2TokenStorage.token else {return}
-        
-        fetchProfileInfo(token: token)
-    }
-    
-    func fetchProfileInfo(token: String) {
+    private func fetchProfileInfo(token: String) {
         profileService.fecthProfile(token) { [weak self] result in
             
             UIBlockingProgressHUD.dismiss()
@@ -111,5 +87,26 @@ extension SplashViewController: AuthViewControllerDelegate {
         guard let username = profileService.profile?.userName else {return}
         
         profileImageService.fetchProfileImageURL(token: token, username: username) {_ in}
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        makeSplashViewControllerScreen()
+        
+        if let token = oauth2TokenStorage.token {
+            
+            fetchProfileInfo(token: token)
+        } else {
+            switchToAuthViewController()
+        }
+    }
+}
+
+
+extension SplashViewController: AuthViewControllerDelegate {
+    
+    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
+        dismiss(animated: true)
     }
 }
