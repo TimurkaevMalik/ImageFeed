@@ -10,10 +10,10 @@ import Foundation
 struct Profile {
     var userName: String
     var firstName: String
-    var lastName: String
-    var bio: String
+    var lastName: String?
+    var bio: String?
     var name: String {
-        firstName + " " + lastName
+        firstName + " " + (lastName ?? "")
     }
     
     init(_ result: ProfileResult){
