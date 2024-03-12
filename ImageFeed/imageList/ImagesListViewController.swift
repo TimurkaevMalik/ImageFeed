@@ -9,10 +9,13 @@ import UIKit
 
 class ImagesListViewController: UIViewController {
     
+    let listService = ImagesListService()
+    private let oauth2TokenStorage = OAuth2TokenStorage()
+
     @IBOutlet private var tableView: UITableView!
     
     private let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    
+    let imagesListService = ImagesListService()
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -41,7 +44,29 @@ class ImagesListViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        
+        
+//    fetchInfo()
     }
+    func fetchInfo() {
+        
+        guard let token = oauth2TokenStorage.token else {
+            print("TOKEN STORAGE IS EMPTY🚫🚫🚫🚫")
+            return
+        }
+        
+        listService.fetchPhotosNextPage(token: token) { result in
+            
+            switch result {
+            case .success(let data):
+                print(data)
+                print(data.count)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -77,6 +102,15 @@ extension ImagesListViewController: UITableViewDataSource {
         
         return imageListCell
     }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath){
+//        
+//        guard indexPath.row + 1 == imagesListService.photos.count else {return}
+//        
+//        imagesListService.fetchPhotosNextPage { result in
+//            <#code#>
+//        }
+//    }
 }
 
 

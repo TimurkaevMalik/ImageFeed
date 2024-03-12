@@ -10,6 +10,9 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
+    let listService = ImagesListService()
+
+    
     private var profileImageServeceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
     
@@ -119,10 +122,35 @@ final class ProfileViewController: UIViewController {
             })
         
         createProfileScreenWithViews()
+//        fetchInfo()
     }
     
+    func fetchInfo() {
+        
+        guard let token = oauth2TokenStorage.token else {
+            print("TOKEN STORAGE IS EMPTY🚫🚫🚫🚫")
+            return
+        }
+        
+        listService.fetchPhotosNextPage(token: token) { result in
+            
+            switch result {
+            case .success(let data):
+//                print(data)
+//                print(data.count)
+//                print("\(self.listService.photos.count)🥰")
+//                print("\(self.listService.photos.first?.largeImageURL)🤣")
+                break
+                
+            case .failure:
+                print("FAILED🚫🚫🚫🚫")
+                break
+            }
+        }
+    }
     
     @objc func didTapLogoutButton() {
+        fetchInfo()
         print("did tap logoutButton button")
     }
 }

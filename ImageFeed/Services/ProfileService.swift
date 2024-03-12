@@ -49,6 +49,7 @@ final class ProfileService {
                 
                 if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode  >= 300 {
                     
+                    print(response.statusCode)
                     completion(.failure(ProfileServiceError.responseError))
                     return
                 }

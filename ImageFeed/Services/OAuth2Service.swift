@@ -55,8 +55,11 @@ class OAuth2Service {
                     return
                 }
                 
-                if let respose = response as? HTTPURLResponse, respose.statusCode < 200 || respose.statusCode >= 300 {
+                if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
+                    
+                    print(response.statusCode)
                     completion(.failure(AuthServiceError.responseError))
+                    return
                 }
                 
                 if let data = data {

@@ -49,6 +49,7 @@ final class ProfileImageService {
                 if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
                     print(response.statusCode)
                     completion(.failure(ProfileImageServiceError.responseError))
+                    return
                 }
                 
                 if let data = data {
@@ -59,12 +60,12 @@ final class ProfileImageService {
                         
                         self.avatarURL = profileImageURL.profileImage.small
                         
-                        completion(.success((profileImageURL.profileImage.small)))
-                        
                         NotificationCenter.default.post(
                             name: ProfileImageService.didChangeNotification,
                             object: self,
                             userInfo: ["URL": profileImageURL.profileImage])
+                        
+                        completion(.success((profileImageURL.profileImage.small)))
                     }
                 }
                 self.task = nil
