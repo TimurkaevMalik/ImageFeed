@@ -29,6 +29,7 @@ final class ImagesListService {
             return}
         
         let nextPage = (lastLoadedPage ?? 0) + 1
+        lastLoadedPage = nextPage
         
         guard let request = makeRequstBody(pageNumber: nextPage, token: token) else {
             comletion(.failure(ImagesListServiceError.codeError))
@@ -79,6 +80,18 @@ final class ImagesListService {
         task = session
         session.resume()
     }
+    
+    func changeLike(photoId: String, isLike: Bool, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        
+    }
+    
+//    private func makeLikeRequestBody(photoId: String ,isLike: Bool) -> URLRequest? {
+//        
+//        if isLike == true {
+//            
+//        }
+//    }
     
     private func makeRequstBody(pageNumber: Int, token: String) -> URLRequest? {
         var urlComponents = URLComponents(string: "https://api.unsplash.com/photos")
