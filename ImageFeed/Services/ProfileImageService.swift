@@ -23,6 +23,10 @@ final class ProfileImageService {
         case invalidRequest
     }
     
+    func removeAvatarURL(){
+        avatarURL = nil
+    }
+    
     func fetchProfileImageURL(token: String, username: String, _ completion: @escaping (Result<String,Error>) -> Void){
         
         assert(Thread.isMainThread)

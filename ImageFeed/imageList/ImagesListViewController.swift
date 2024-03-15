@@ -30,10 +30,12 @@ class ImagesListViewController: UIViewController {
     
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-
+        
+        cell.delegete = self
         cell.cellImage.kf.setImage(with: URL(string: photos[indexPath.row].thumbImageURL), placeholder: UIImage(named: "Placeholder2"))
         
         let isLiked = photos[indexPath.row].isLiked
+        
         let likeImage = isLiked ? UIImage(named: "redLike") : UIImage(named: "emptyLike")
         cell.likeButton.setImage(likeImage, for: .normal)
         
@@ -82,6 +84,10 @@ class ImagesListViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,10 +116,7 @@ class ImagesListViewController: UIViewController {
             
             guard let indexPath = sender as? IndexPath else {return}
             
-            let url = URL(string: photos[indexPath.row].largeImageURL)
-
-//            viewController?.photo = photos[indexPath.row]
-            viewController?.url = url
+            viewController?.fullImageUrl = photos[indexPath.row].largeImageURL
         } else {
             super.prepare(for: segue, sender: sender)
         }
@@ -177,6 +180,35 @@ extension ImagesListViewController: UITableViewDelegate {
                 print("SUCCESS")
             case .failure(_):
                 print("Failure")
+                break
+            }
+        }
+    }
+}
+
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        
+        guard let indexPath = tableView.indexPath(for: cell) else {return}
+        guard let token = oauth2TokenStorage.token else {return}
+        
+        let photo = photos[indexPath.row]
+        
+        UIBlockingProgressHUD.show()
+        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked, token: token) { result in
+            UIBlockingProgressHUD.dismiss()
+            switch result{
+                
+            case .success:
+                self.photos = self.imagesListService.photos
+                cell.setIsLiked(self.photos[indexPath.row].isLiked)
+                
+                print("SUCCESS WHILE CHANGING LIKE")
+                
+            case .failure(_):
+                print("FAILURE WHILE CHANGING LIKE")
                 break
             }
         }

@@ -23,6 +23,10 @@ final class ProfileService {
         case invalidRequest
     }
     
+    func removeProfileInfo(){
+        profile = nil
+    }
+    
     func fecthProfile(_ token: String, completion: @escaping (Result<Profile,Error>) -> Void) {
         
         assert(Thread.isMainThread)

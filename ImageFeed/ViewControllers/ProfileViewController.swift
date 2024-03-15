@@ -10,14 +10,12 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
-    let listService = ImagesListService()
-
-    
     private var profileImageServeceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
-    
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let profileLogoutService = ProfileLogoutService.shared
     private let profileService = ProfileService.shared
+    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let alertPresenter = AlertPresenter()
     
     private lazy var avatarImageView = UIImageView()
     private lazy var nameLabel = UILabel()
@@ -108,6 +106,15 @@ final class ProfileViewController: UIViewController {
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.processor(processor)])
     }
     
+    private func switchToSplashController() {
+        
+        guard let window = UIApplication.shared.windows.first else {
+            assertionFailure("Invalid Configuration")
+            return
+        }
+        
+        window.rootViewController = SplashViewController()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,6 +132,20 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc func didTapLogoutButton() {
-        print("did tap logoutButton button")
+        
+        let message = "Вы хотите выйти из аккаунта?"
+        let title = ""
+        let buttonText = "Да"
+        let cancelButtonText = "Нет"
+        
+        alertPresenter.showAlert2(vc: self, result: AlertModel(
+            message: message,
+            title: title,
+            buttonText: buttonText,
+            cancelButtonText: cancelButtonText,
+            completion: {
+                self.profileLogoutService.logOut()
+                self.switchToSplashController()
+            }))
     }
 }

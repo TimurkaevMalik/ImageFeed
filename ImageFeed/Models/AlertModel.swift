@@ -11,6 +11,7 @@ struct AlertModel {
     var message: String
     var title: String
     var buttonText: String
+    var cancelButtonText: String?
     
     var completion: () -> Void
 }

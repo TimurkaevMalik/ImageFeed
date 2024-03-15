@@ -13,29 +13,26 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet private var imageView: UIImageView!
     
-    var photo: Photo?
-    var url: URL?
+    private let alertPresenter = AlertPresenter()
     
+    var fullImageUrl: String?
     var image: UIImage!
     
     
-    private func addImage() {
-        
-        imageView.kf.setImage(with: url)
-        
-        guard let image = imageView.image else {
-            return
-        }
-        
-        self.image = image
-        rescaleAndCenterImageInScrollView(photo: image)
-    }
-    
     private func zoomImage(){
+        
+        guard let fullImageUrl = fullImageUrl else {return}
+        guard let url = URL(string: fullImageUrl) else {return}
+        
+        let message = "Попробовать ещё раз?"
+        let title = "Что-то пошло не так."
+        let buttonText = "Повторить"
+        let cancelButtonText = "Не надо"
+        
+        UIBlockingProgressHUD.show()
         imageView.kf.setImage(with: url) {[weak self] result in
             
             DispatchQueue.main.async {
-                
                 guard let self = self else {return}
                 
                 switch result{
@@ -43,13 +40,23 @@ final class SingleImageViewController: UIViewController {
                 case .success(let result2):
                     self.image = result2.image
                     self.rescaleAndCenterImageInScrollView(photo: result2.image)
+                    UIBlockingProgressHUD.dismiss()
                     
                 case .failure:
-                    print("DIDNT SAVE IMAGE")
+                    UIBlockingProgressHUD.dismiss()
+                    self.alertPresenter.showAlert2(
+                        vc: self,
+                        result: AlertModel(message: message,
+                                           title: title,
+                                           buttonText: buttonText,
+                                           cancelButtonText: cancelButtonText,
+                                           completion: {
+                                               self.zoomImage()
+                                           }))
+                    break
                 }
             }
         }
-        
     }
     
     private func rescaleAndCenterImageInScrollView(photo: UIImage) {
@@ -73,17 +80,12 @@ final class SingleImageViewController: UIViewController {
         self.image = imageView.image
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
-        
-        //        imageView.image = image
         
         zoomImage()
     }

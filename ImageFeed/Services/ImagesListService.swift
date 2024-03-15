@@ -9,12 +9,12 @@ import Foundation
 
 final class ImagesListService {
     
-    private(set) var photos: [Photo] = []
+    var photos: [Photo] = []
     private let oauth2TokenStorage = OAuth2TokenStorage()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
     private var lastLoadedPage: Int?
-    private var task: URLSessionTask?
+    private var fetchingPhotosTask: URLSessionTask?
     
     private enum ImagesListServiceError: Error {
         case codeError
@@ -22,9 +22,13 @@ final class ImagesListService {
         case invalidRequest
     }
     
+    func removePhotos(){
+        photos.removeAll()
+    }
+    
     func fetchPhotosNextPage(token: String, comletion: @escaping (Result<[Photo],Error>) -> Void) {
         
-        guard task == nil else {
+        guard fetchingPhotosTask == nil else {
             comletion(.failure(ImagesListServiceError.invalidRequest))
             return}
         
@@ -74,24 +78,81 @@ final class ImagesListService {
                         comletion(.failure(ImagesListServiceError.codeError))
                     }
                 }
-                self.task = nil
+                self.fetchingPhotosTask = nil
             }
         }
-        task = session
+        fetchingPhotosTask = session
         session.resume()
     }
     
-    func changeLike(photoId: String, isLike: Bool, completion: @escaping (Result<Void, Error>) -> Void) {
+    
+    func changeLike(photoId: String, isLike: Bool, token: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
+        guard let request = makeLikeRequestBody(photoId: photoId, isLike: isLike, token: token) else {
+            completion(.failure(ImagesListServiceError.codeError))
+            return
+        }
         
+        let session = URLSession.shared.dataTask(with: request) {[weak self] data, response, error in
+            
+            DispatchQueue.main.async {
+                
+                guard let self = self else {return}
+                
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
+                    
+                    print(response.statusCode)
+                    completion(.failure(ImagesListServiceError.responseError))
+                }
+                
+                if let data = data {
+                    do {
+                        
+                        let decodedData = try JSONDecoder().decode(SinglePhotoDecoder.self, from: data)
+                        
+                        
+                        if let index = self.photos.firstIndex(where: { $0.id == photoId }) {
+                            
+                            var photo = self.photos[index]
+                            
+                            photo.isLiked = decodedData.photo.isLiked
+                            
+                            self.photos.remove(at: index)
+                            self.photos.insert(photo, at: index)
+                            
+                            completion(.success(print("")))
+                        }
+                    } catch {
+                        completion(.failure(ImagesListServiceError.codeError))
+                    }
+                }
+            }
+        }
+        session.resume()
     }
     
-//    private func makeLikeRequestBody(photoId: String ,isLike: Bool) -> URLRequest? {
-//        
-//        if isLike == true {
-//            
-//        }
-//    }
+    private func makeLikeRequestBody(photoId: String, isLike: Bool, token: String) -> URLRequest? {
+        
+        guard let url = URL(string: "https://api.unsplash.com/photos/\(photoId)/like") else {
+            assertionFailure("Failed to create URL")
+            return nil}
+        
+        var request = URLRequest(url: url)
+        
+        if isLike == true {
+            request.httpMethod = "DELETE"
+        } else {
+            request.httpMethod = "POST"
+        }
+        request.setValue("Bearer \(token))", forHTTPHeaderField: "Authorization")
+        
+        return request
+    }
     
     private func makeRequstBody(pageNumber: Int, token: String) -> URLRequest? {
         var urlComponents = URLComponents(string: "https://api.unsplash.com/photos")
