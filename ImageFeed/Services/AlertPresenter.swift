@@ -33,8 +33,8 @@ final class AlertPresenter {
         
         let actionCancel = UIAlertAction(title: result.cancelButtonText, style: .default)
         
-        alert.addAction(actionCancel)
         alert.addAction(actionRestart)
+        alert.addAction(actionCancel)
         
         controller.present(alert, animated: true)
     }
