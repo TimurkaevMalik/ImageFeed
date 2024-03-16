@@ -14,7 +14,6 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     
     private let alertPresenter = AlertPresenter()
-    
     var fullImageUrl: String?
     var image: UIImage!
     
@@ -30,7 +29,7 @@ final class SingleImageViewController: UIViewController {
         let cancelButtonText = "Не надо"
         
         UIBlockingProgressHUD.show()
-        imageView.kf.setImage(with: url) {[weak self] result in
+        imageView.kf.setImage(with: url) { [weak self] result in
             
             DispatchQueue.main.async {
                 guard let self = self else {return}

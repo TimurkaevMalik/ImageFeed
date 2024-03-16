@@ -67,21 +67,9 @@ class ImagesListViewController: UIViewController {
     }
     
     func fetchImages() {
+        guard let token = oauth2TokenStorage.token else {return}
         
-        guard let token = oauth2TokenStorage.token else {
-            return
-        }
-        
-        imagesListService.fetchPhotosNextPage(token: token) { result in
-            
-            switch result {
-            case .success(let data):
-                print(data.count)
-                
-            case .failure(let error):
-                print(error)
-            }
-        }
+        imagesListService.fetchPhotosNextPage(token: token) { _ in}
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,7 +89,6 @@ class ImagesListViewController: UIViewController {
             queue: .main,
             using: { _ in
                 self.updateTableViewAnimated()
-                print("RECIEVED")
             })
         
         fetchImages()
@@ -151,9 +138,7 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //        guard let image = UIImage(named: photos[indexPath.row].id) else {
-        //            return 0
-        //        }
+        
         let imageSize = photos[indexPath.row].size
         
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
@@ -170,19 +155,7 @@ extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath){
         
         guard indexPath.row + 1 == imagesListService.photos.count else {return}
-        guard let token = oauth2TokenStorage.token else {return}
-        
-        imagesListService.fetchPhotosNextPage(token: token) { result in
-            
-            switch result {
-                
-            case .success(_):
-                print("SUCCESS")
-            case .failure(_):
-                print("Failure")
-                break
-            }
-        }
+        fetchImages()
     }
 }
 
@@ -198,17 +171,16 @@ extension ImagesListViewController: ImagesListCellDelegate {
         
         UIBlockingProgressHUD.show()
         imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked, token: token) { result in
+            
             UIBlockingProgressHUD.dismiss()
+            
             switch result{
                 
             case .success:
                 self.photos = self.imagesListService.photos
                 cell.setIsLiked(self.photos[indexPath.row].isLiked)
                 
-                print("SUCCESS WHILE CHANGING LIKE")
-                
-            case .failure(_):
-                print("FAILURE WHILE CHANGING LIKE")
+            case .failure:
                 break
             }
         }

@@ -131,6 +131,13 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="1yx-Gf-MTp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PlaceholderLogo" translatesAutoresizingMaskIntoConstraints="NO" id="4d4-An-tmA">
+                                        <rect key="frame" x="165.5" y="410.5" width="83" height="75"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="83" id="XBR-Z2-ecQ"/>
+                                            <constraint firstAttribute="height" constant="75" id="wdK-mt-jzA"/>
+                                        </constraints>
+                                    </imageView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="4kZ-Ij-STy">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                     </imageView>
@@ -172,12 +179,14 @@
                         <viewLayoutGuide key="safeArea" id="BNv-7r-ecL"/>
                         <color key="backgroundColor" name="YPBlack"/>
                         <constraints>
+                            <constraint firstItem="4d4-An-tmA" firstAttribute="centerY" secondItem="BNv-7r-ecL" secondAttribute="centerY" id="HEi-Mt-Q2E"/>
                             <constraint firstItem="gLo-Z0-fps" firstAttribute="top" secondItem="QK4-5J-AFy" secondAttribute="top" constant="55" id="Nzp-XH-Hbj"/>
                             <constraint firstItem="h99-gR-G4v" firstAttribute="centerX" secondItem="BNv-7r-ecL" secondAttribute="centerX" id="Tsd-Dd-toJ"/>
                             <constraint firstAttribute="bottom" secondItem="1yx-Gf-MTp" secondAttribute="bottom" id="U0u-qb-X6A"/>
                             <constraint firstItem="BNv-7r-ecL" firstAttribute="trailing" secondItem="1yx-Gf-MTp" secondAttribute="trailing" id="Xyq-fv-KUn"/>
                             <constraint firstItem="1yx-Gf-MTp" firstAttribute="leading" secondItem="BNv-7r-ecL" secondAttribute="leading" id="iam-5u-7AK"/>
                             <constraint firstItem="1yx-Gf-MTp" firstAttribute="top" secondItem="QK4-5J-AFy" secondAttribute="top" id="k1g-5c-wXE"/>
+                            <constraint firstItem="4d4-An-tmA" firstAttribute="centerX" secondItem="BNv-7r-ecL" secondAttribute="centerX" id="lAS-Fv-sOY"/>
                             <constraint firstItem="BNv-7r-ecL" firstAttribute="bottom" secondItem="h99-gR-G4v" secondAttribute="bottom" constant="36" id="niv-Yl-oqg"/>
                             <constraint firstItem="gLo-Z0-fps" firstAttribute="leading" secondItem="BNv-7r-ecL" secondAttribute="leading" constant="4" id="tEb-oq-sO4"/>
                         </constraints>
@@ -325,6 +334,7 @@
     </scenes>
     <resources>
         <image name="0" width="200" height="132"/>
+        <image name="PlaceholderLogo" width="83" height="75"/>
         <image name="auth_logo" width="60" height="60"/>
         <image name="emptyLike" width="30" height="28"/>
         <image name="nav_back_button" width="9" height="16"/>

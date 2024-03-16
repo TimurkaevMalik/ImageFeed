@@ -26,9 +26,14 @@ struct Photo {
         
         self.createdAt = {
             if let dateString = photoResult.createdAt {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
+
+                let dateFormatter = ISO8601DateFormatter()
                 let date = dateFormatter.date(from: dateString)
+                
+                guard let date = date else {
+                    return nil
+                }
+                
                 return date
             } else {
                 return nil

@@ -133,8 +133,8 @@ final class ProfileViewController: UIViewController {
     
     @objc func didTapLogoutButton() {
         
-        let message = "Вы хотите выйти из аккаунта?"
-        let title = ""
+        let message = "Уверены что хотите выйти?"
+        let title = "Пока, пока!"
         let buttonText = "Да"
         let cancelButtonText = "Нет"
         

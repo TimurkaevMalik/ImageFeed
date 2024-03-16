@@ -53,7 +53,6 @@ final class ImagesListService {
                 if let response = response as? HTTPURLResponse,
                    response.statusCode < 200 || response.statusCode >= 300 {
                     print(response.statusCode)
-                    print(response)
                     comletion(.failure(ImagesListServiceError.responseError))
                     return
                 }
@@ -62,7 +61,6 @@ final class ImagesListService {
                     do {
                         
                         let decodedData = try JSONDecoder().decode([PhotoResult].self, from: data)
-                        
                         
                         for photo in decodedData {
                             self.photos.append(Photo(photoResult: photo))
