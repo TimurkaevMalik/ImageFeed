@@ -28,9 +28,7 @@ final class ImagesListService {
     
     func fetchPhotosNextPage(token: String, comletion: @escaping (Result<[Photo],Error>) -> Void) {
         
-        guard fetchingPhotosTask == nil else {
-            comletion(.failure(ImagesListServiceError.invalidRequest))
-            return}
+        guard fetchingPhotosTask == nil else {return}
         
         let nextPage = (lastLoadedPage ?? 0) + 1
         lastLoadedPage = nextPage
@@ -142,11 +140,8 @@ final class ImagesListService {
         
         var request = URLRequest(url: url)
         
-        if isLike == true {
-            request.httpMethod = "DELETE"
-        } else {
-            request.httpMethod = "POST"
-        }
+        request.httpMethod = isLike ? "DELETE" : "POST"
+        
         request.setValue("Bearer \(token))", forHTTPHeaderField: "Authorization")
         
         return request
@@ -157,7 +152,7 @@ final class ImagesListService {
         
         urlComponents?.queryItems = [
             URLQueryItem(name: "page", value: "\(pageNumber)"),
-            URLQueryItem(name: "per_page", value: "10"),
+            URLQueryItem(name: "per_page", value: "2"),
             URLQueryItem(name: "order_by", value: "latest")
         ]
         

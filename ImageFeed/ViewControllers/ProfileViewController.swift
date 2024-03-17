@@ -10,18 +10,18 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
+    private lazy var avatarImageView = UIImageView()
+    private lazy var nameLabel = UILabel()
+    private lazy var loginNameLabel = UILabel()
+    private lazy var descriptionLabel = UILabel()
+    private lazy var logoutButton = UIButton()
+    
     private var profileImageServeceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
     private let profileLogoutService = ProfileLogoutService.shared
     private let profileService = ProfileService.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let alertPresenter = AlertPresenter()
-    
-    private lazy var avatarImageView = UIImageView()
-    private lazy var nameLabel = UILabel()
-    private lazy var loginNameLabel = UILabel()
-    private lazy var descriptionLabel = UILabel()
-    private lazy var logoutButton = UIButton()
     
     
     private func createProfileScreenWithViews() {
@@ -138,7 +138,7 @@ final class ProfileViewController: UIViewController {
         let buttonText = "Да"
         let cancelButtonText = "Нет"
         
-        alertPresenter.showAlert2(vc: self, result: AlertModel(
+        alertPresenter.showAlert(vc: self, result: AlertModel(
             message: message,
             title: title,
             buttonText: buttonText,
@@ -146,6 +146,7 @@ final class ProfileViewController: UIViewController {
             completion: {
                 self.profileLogoutService.logOut()
                 self.switchToSplashController()
-            }))
+            }
+        ))
     }
 }

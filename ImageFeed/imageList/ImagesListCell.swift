@@ -19,11 +19,7 @@ final class ImagesListCell: UITableViewCell {
     func setIsLiked(_ isLiked: Bool) {
         print(isLiked)
         
-        if isLiked == true {
-            likeButton.setImage(UIImage(named: "redLike"), for: .normal)
-        } else {
-            likeButton.setImage(UIImage(named: "emptyLike"), for: .normal)
-        }
+        likeButton.setImage(UIImage(named: isLiked ? "redLike" : "emptyLike"), for: .normal)
     }
     
     override func prepareForReuse() {

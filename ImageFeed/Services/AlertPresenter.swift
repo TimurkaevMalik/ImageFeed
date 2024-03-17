@@ -20,21 +20,10 @@ final class AlertPresenter {
         
         alert.addAction(action)
         
-        controller.present(alert, animated: true)
-    }
-    
-    func showAlert2(vc controller: UIViewController, result: AlertModel){
-        
-        let alert = UIAlertController(title: result.title, message: result.message, preferredStyle: .alert)
-        
-        let actionRestart = UIAlertAction(title: result.buttonText, style: .default) { _ in
-            result.completion()
+        if let secondActionText = result.cancelButtonText {
+            let actionCancel = UIAlertAction(title: secondActionText, style: .default)
+            alert.addAction(actionCancel)
         }
-        
-        let actionCancel = UIAlertAction(title: result.cancelButtonText, style: .default)
-        
-        alert.addAction(actionRestart)
-        alert.addAction(actionCancel)
         
         controller.present(alert, animated: true)
     }

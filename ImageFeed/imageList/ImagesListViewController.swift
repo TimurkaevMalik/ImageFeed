@@ -60,9 +60,7 @@ class ImagesListViewController: UIViewController {
                 }
                 tableView.insertRows(at: indexPath, with: .automatic)
             } completion: { _ in
-                
             }
-            
         }
     }
     
@@ -72,9 +70,6 @@ class ImagesListViewController: UIViewController {
         imagesListService.fetchPhotosNextPage(token: token) { _ in}
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -43,7 +43,7 @@ final class SingleImageViewController: UIViewController {
                     
                 case .failure:
                     UIBlockingProgressHUD.dismiss()
-                    self.alertPresenter.showAlert2(
+                    self.alertPresenter.showAlert(
                         vc: self,
                         result: AlertModel(message: message,
                                            title: title,
