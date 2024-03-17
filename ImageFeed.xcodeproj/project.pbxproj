@@ -134,15 +134,10 @@
 		BC87DE692B83761C00AC8C19 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BCB43F0A2BA758ED0006D47C /* PhotoDecoders */,
+				BCB43F092BA758B60006D47C /* ProfileDecoders */,
+				BCB43F0B2BA75AD40006D47C /* Common */,
 				BC87DE6A2B83765A00AC8C19 /* OAuthTokenResponseBody.swift */,
-				BC338A292BA01925007BC50C /* Photo.swift */,
-				BC35353B2BA4490000D3567F /* SinglePhotoDecoder.swift */,
-				BC338A272BA00BA1007BC50C /* PhotoResult.swift */,
-				BCAE633E2B91448A00C5B12E /* Profile.swift */,
-				BCAE633C2B91439E00C5B12E /* ProfileResult.swift */,
-				BCB303AC2B92113A00408095 /* UserResult.swift */,
-				BCAE63422B915F9B00C5B12E /* AlertModel.swift */,
-				BC0CD9AB2B73E11E00252F81 /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,15 +145,10 @@
 		BC87DE6C2B8379B300AC8C19 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BCB43F072BA758450006D47C /* OAuth */,
+				BCB43F062BA758240006D47C /* Profile */,
+				BCB43F082BA7586C0006D47C /* Common */,
 				BC338A232BA004E4007BC50C /* ImagesListService.swift */,
-				BCAE633A2B911C3800C5B12E /* ProfileService.swift */,
-				BCB303AA2B9210F100408095 /* ProfileImageService.swift */,
-				BC35353D2BA47E7E00D3567F /* ProfileLogoutService.swift */,
-				BC87DE6D2B8379EC00AC8C19 /* OAuth2Service.swift */,
-				BC87DE6F2B8386E100AC8C19 /* OAuth2TokenStorage.swift */,
-				BCA6475C2B8E8225003E21BC /* UIBlockingProgressHUD.swift */,
-				BCAE63402B915E1E00C5B12E /* AlertPresenter.swift */,
-				BCB43F042BA74D7A0006D47C /* RecievedDateFormatter.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -168,10 +158,67 @@
 			children = (
 				BC4393CE2B83E22A00AD96F5 /* SplashViewController.swift */,
 				BC323E512B5F919100F034EA /* ProfileViewController.swift */,
-				BC2FD1A52B62BC4800EB39BA /* SingleImageViewController.swift */,
 				BCA435AA2B991BCF00A8C541 /* TabBarController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BCB43F062BA758240006D47C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				BCAE633A2B911C3800C5B12E /* ProfileService.swift */,
+				BCB303AA2B9210F100408095 /* ProfileImageService.swift */,
+				BC35353D2BA47E7E00D3567F /* ProfileLogoutService.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		BCB43F072BA758450006D47C /* OAuth */ = {
+			isa = PBXGroup;
+			children = (
+				BC87DE6D2B8379EC00AC8C19 /* OAuth2Service.swift */,
+				BC87DE6F2B8386E100AC8C19 /* OAuth2TokenStorage.swift */,
+			);
+			path = OAuth;
+			sourceTree = "<group>";
+		};
+		BCB43F082BA7586C0006D47C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BCAE63402B915E1E00C5B12E /* AlertPresenter.swift */,
+				BCA6475C2B8E8225003E21BC /* UIBlockingProgressHUD.swift */,
+				BCB43F042BA74D7A0006D47C /* RecievedDateFormatter.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		BCB43F092BA758B60006D47C /* ProfileDecoders */ = {
+			isa = PBXGroup;
+			children = (
+				BCAE633E2B91448A00C5B12E /* Profile.swift */,
+				BCAE633C2B91439E00C5B12E /* ProfileResult.swift */,
+				BCB303AC2B92113A00408095 /* UserResult.swift */,
+			);
+			path = ProfileDecoders;
+			sourceTree = "<group>";
+		};
+		BCB43F0A2BA758ED0006D47C /* PhotoDecoders */ = {
+			isa = PBXGroup;
+			children = (
+				BC338A292BA01925007BC50C /* Photo.swift */,
+				BC338A272BA00BA1007BC50C /* PhotoResult.swift */,
+				BC35353B2BA4490000D3567F /* SinglePhotoDecoder.swift */,
+			);
+			path = PhotoDecoders;
+			sourceTree = "<group>";
+		};
+		BCB43F0B2BA75AD40006D47C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				BCAE63422B915F9B00C5B12E /* AlertModel.swift */,
+				BC0CD9AB2B73E11E00252F81 /* Constants.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		BCDFF33F2B762DD300B99B7D /* Auth */ = {
@@ -190,6 +237,7 @@
 				BCE232C72B57BEE30006483E /* ImagesListCell.swift */,
 				BC340B3B2B489926008780C8 /* ImagesListViewController.swift */,
 				BC3535392BA42E2F00D3567F /* ImagesListCellDelegate.swift */,
+				BC2FD1A52B62BC4800EB39BA /* SingleImageViewController.swift */,
 			);
 			path = imageList;
 			sourceTree = "<group>";
