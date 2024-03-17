@@ -11,22 +11,16 @@ import Kingfisher
 class ImagesListViewController: UIViewController {
     
     
-    private var imagesListServiceObserver: NSObjectProtocol?
-    
+    var photos: [Photo] = []
     let imagesListService = ImagesListService()
-    private let oauth2TokenStorage = OAuth2TokenStorage()
     
     @IBOutlet private var tableView: UITableView!
     
-    var photos: [Photo] = []
+    private var imagesListServiceObserver: NSObjectProtocol?
+    private let dateFormatter = RecievedDateFormatter()
+    private let oauth2TokenStorage = OAuth2TokenStorage()
     private var photosName: [String] = Array(0..<20).map{ "\($0)" }
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
     
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
@@ -39,11 +33,7 @@ class ImagesListViewController: UIViewController {
         let likeImage = isLiked ? UIImage(named: "redLike") : UIImage(named: "emptyLike")
         cell.likeButton.setImage(likeImage, for: .normal)
         
-        if let date = photos[indexPath.row].createdAt {
-            cell.dateLabel.text = dateFormatter.string(from: date)
-        } else {
-            cell.dateLabel.text = ""
-        }
+        cell.dateLabel.text = dateFormatter.fomateStringDate(string: photos[indexPath.row].createdAt)
     }
     
     func updateTableViewAnimated() {

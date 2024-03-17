@@ -10,7 +10,7 @@ import Foundation
 struct Photo {
     let id: String
     let size: CGSize
-    let createdAt: Date?
+    let createdAt: String?
     let welcomeDescription: String?
     let thumbImageURL: String
     let largeImageURL: String
@@ -23,21 +23,6 @@ struct Photo {
         self.thumbImageURL = photoResult.urls.thumb
         self.largeImageURL = photoResult.urls.full
         self.isLiked = photoResult.isLiked
-        
-        self.createdAt = {
-            if let dateString = photoResult.createdAt {
-
-                let dateFormatter = ISO8601DateFormatter()
-                let date = dateFormatter.date(from: dateString)
-                
-                guard let date = date else {
-                    return nil
-                }
-                
-                return date
-            } else {
-                return nil
-            }
-        }()
+        self.createdAt = photoResult.createdAt
     }
 }
