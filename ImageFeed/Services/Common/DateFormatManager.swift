@@ -7,9 +7,9 @@
 
 import Foundation
 
-class RecievedDateFormatter {
+class DateFormatManager {
     
-    static let shared = RecievedDateFormatter()
+    static let shared = DateFormatManager()
     
     private let isoDateFormatter = ISO8601DateFormatter()
     private lazy var dateFormatter: DateFormatter = {
@@ -34,4 +34,3 @@ class RecievedDateFormatter {
         return dateFormatter.string(from: date)
     }
 }
-

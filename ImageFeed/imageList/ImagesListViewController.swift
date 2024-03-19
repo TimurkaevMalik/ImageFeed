@@ -17,7 +17,7 @@ class ImagesListViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     
     private var imagesListServiceObserver: NSObjectProtocol?
-    private let dateFormatter = RecievedDateFormatter.shared
+    private let dateFormatter = DateFormatManager.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private var photosName: [String] = Array(0..<20).map{ "\($0)" }
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
