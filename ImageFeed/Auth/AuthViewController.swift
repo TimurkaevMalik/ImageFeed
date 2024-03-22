@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol AuthViewControllerDelegate: AnyObject {
-    func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
-}
 
 class AuthViewController: UIViewController {
     
@@ -17,7 +14,7 @@ class AuthViewController: UIViewController {
     private let oauth2Service = OAuth2Service()
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let showAuthWebViewSegueIdentifier = "ShowWebView"
-
+    
     weak var delegate: AuthViewControllerDelegate?
     
     
@@ -51,6 +48,10 @@ class AuthViewController: UIViewController {
                 let webViewViewController = segue.destination as? WebViewViewController else {
                 return assertionFailure("Failed to prepare for \(showAuthWebViewSegueIdentifier)")}
             
+            let webViewPresenter = WebViewPresenter()
+            
+            webViewViewController.presenter = webViewPresenter
+            webViewPresenter.view = webViewViewController
             webViewViewController.delegate = self
         } else {
             super.prepare(for: segue, sender: sender)
