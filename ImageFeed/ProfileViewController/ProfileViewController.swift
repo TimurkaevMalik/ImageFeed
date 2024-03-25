@@ -10,17 +10,17 @@ import Kingfisher
 
 final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     
-    var presenter: ProfilePresenter?
+    var presenter: ProfilePresenterProtocol?
     
-    private lazy var avatarImageView = UIImageView()
-    private lazy var nameLabel = UILabel()
-    private lazy var loginNameLabel = UILabel()
-    private lazy var descriptionLabel = UILabel()
-    private lazy var logoutButton = UIButton()
+    lazy var avatarImageView = UIImageView()
+    lazy var nameLabel = UILabel()
+    lazy var loginNameLabel = UILabel()
+    lazy var descriptionLabel = UILabel()
+    lazy var logoutButton = UIButton()
     
     private var profileImageServeceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
-    private let profileLogoutService = ProfileLogoutService.shared
+
     private let profileService = ProfileService.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let alertPresenter = AlertPresenter()
@@ -107,19 +107,11 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.processor(processor)])
     }
-    ////ffff
-    private func switchToSplashController() {
-        
-        guard let window = UIApplication.shared.windows.first else {
-            assertionFailure("Invalid Configuration")
-            return
-        }
-        
-        window.rootViewController = SplashViewController()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = ProfilePresenter()
+        presenter?.view = self
         
         profileImageServeceObserver = NotificationCenter.default.addObserver(
             forName: ProfileImageService.didChangeNotification,
@@ -134,21 +126,6 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
     }
     
     @objc func didTapLogoutButton() {
-        
-        let message = "Уверены что хотите выйти?"
-        let title = "Пока, пока!"
-        let buttonText = "Да"
-        let cancelButtonText = "Нет"
-        
-        alertPresenter.showAlert(vc: self, result: AlertModel(
-            message: message,
-            title: title,
-            buttonText: buttonText,
-            cancelButtonText: cancelButtonText,
-            completion: {
-                self.profileLogoutService.logOut()
-                self.switchToSplashController()
-            }
-        ))
+        presenter?.logoutAlert()
     }
 }

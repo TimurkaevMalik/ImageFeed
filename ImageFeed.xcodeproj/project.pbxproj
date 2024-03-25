@@ -27,6 +27,7 @@
 		BC76432E2BB1B014007A9C31 /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC76432D2BB1B014007A9C31 /* AuthHelper.swift */; };
 		BC83046A2BB2250000CE817B /* ProfileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8304692BB2250000CE817B /* ProfileProtocols.swift */; };
 		BC83046D2BB225AC00CE817B /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC83046C2BB225AC00CE817B /* ProfilePresenter.swift */; };
+		BC83046F2BB2305600CE817B /* ProfileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC83046E2BB2305600CE817B /* ProfileViewTests.swift */; };
 		BC87DE6B2B83765A00AC8C19 /* OAuthTokenResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC87DE6A2B83765A00AC8C19 /* OAuthTokenResponseBody.swift */; };
 		BC87DE6E2B8379EC00AC8C19 /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC87DE6D2B8379EC00AC8C19 /* OAuth2Service.swift */; };
 		BC87DE702B8386E100AC8C19 /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC87DE6F2B8386E100AC8C19 /* OAuth2TokenStorage.swift */; };
@@ -83,6 +84,7 @@
 		BC76432D2BB1B014007A9C31 /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		BC8304692BB2250000CE817B /* ProfileProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProtocols.swift; sourceTree = "<group>"; };
 		BC83046C2BB225AC00CE817B /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		BC83046E2BB2305600CE817B /* ProfileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewTests.swift; sourceTree = "<group>"; };
 		BC87DE6A2B83765A00AC8C19 /* OAuthTokenResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthTokenResponseBody.swift; sourceTree = "<group>"; };
 		BC87DE6D2B8379EC00AC8C19 /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		BC87DE6F2B8386E100AC8C19 /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				BCAC5D7F2BB1F81F00E1401A /* WebViewTests.swift */,
+				BC83046E2BB2305600CE817B /* ProfileViewTests.swift */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC83046F2BB2305600CE817B /* ProfileViewTests.swift in Sources */,
 				BCAC5D802BB1F81F00E1401A /* WebViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

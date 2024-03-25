@@ -8,7 +8,8 @@
 import Foundation
 
 protocol ProfilePresenterProtocol {
-    
+    var view: ProfileViewControllerProtocol? { get set }
+    func logoutAlert()
 }
 
 protocol ProfileViewControllerProtocol: AnyObject {
