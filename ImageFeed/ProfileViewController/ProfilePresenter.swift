@@ -13,7 +13,16 @@ class ProfilePresenter: ProfilePresenterProtocol {
     
     private let alertPresenter = AlertPresenter()
     private let profileLogoutService = ProfileLogoutService.shared
+    private let profileImageService = ProfileImageService.shared
 
+    
+    func avatarURL() -> URL? {
+        guard let profileImageURL = profileImageService.avatarURL,
+              let url = URL(string: profileImageURL)
+        else {return nil}
+        
+        return url
+    }
     
     private func switchToSplashController() {
         

@@ -98,10 +98,8 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         descriptionLabel.text = profile.bio
     }
     
-    private func updateAvatar() {
-        guard let profileImageURL = profileImageService.avatarURL,
-              let url = URL(string: profileImageURL)
-        else {return}
+    func updateAvatar() {
+        guard let url = presenter?.avatarURL() else {return}
         
         let processor = RoundCornerImageProcessor(cornerRadius: 450)
         

@@ -10,6 +10,7 @@ import Foundation
 protocol ProfilePresenterProtocol {
     var view: ProfileViewControllerProtocol? { get set }
     func logoutAlert()
+    func avatarURL() -> URL?
 }
 
 protocol ProfileViewControllerProtocol: AnyObject {

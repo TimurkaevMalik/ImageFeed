@@ -20,6 +20,16 @@ final class ProfileViewTests: XCTestCase {
         XCTAssertTrue(presenter.logoutAlertWasCalled)
     }
     
+    func testDidCallAvatarURL(){
+        let presenter = ProfilePresenterSpy()
+        let viewController = ProfileViewController()
+        
+        viewController.presenter = presenter
+        viewController.updateAvatar()
+        
+        XCTAssertTrue(presenter.avatarURLMethodCalled)
+    }
+    
     func testUpdateProfileDetails(){
         let viewController = ProfileViewController()
         
@@ -33,11 +43,21 @@ final class ProfileViewTests: XCTestCase {
     }
 }
 
+
 class ProfilePresenterSpy: ProfilePresenterProtocol {
+    
     var view: ImageFeed.ProfileViewControllerProtocol?
     var logoutAlertWasCalled = false
+    var avatarURLMethodCalled = false
     
     func logoutAlert() {
         logoutAlertWasCalled = true
     }
+    
+    func avatarURL() -> URL? {
+        avatarURLMethodCalled = true
+        
+        return nil
+    }
+    
 }
