@@ -8,7 +8,9 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+    
+    var presenter: ProfilePresenter?
     
     private lazy var avatarImageView = UIImageView()
     private lazy var nameLabel = UILabel()
@@ -105,7 +107,7 @@ final class ProfileViewController: UIViewController {
         
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.processor(processor)])
     }
-    
+    ////ffff
     private func switchToSplashController() {
         
         guard let window = UIApplication.shared.windows.first else {

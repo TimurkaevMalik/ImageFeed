@@ -11,6 +11,11 @@ protocol AuthViewControllerDelegate: AnyObject {
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String)
 }
 
+protocol AuthHelperProtocol {
+    func authRequest() -> URLRequest?
+    func code(from url: URL) ->String?
+}
+
 public protocol WebViewPresenterProtocol {
     var view: WebViewViewControllerProtocol? { get set }
     func viewDidLoad()
