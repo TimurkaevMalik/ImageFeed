@@ -62,7 +62,7 @@ final class ImagesListService {
                     do {
                         
                         let decodedData = try JSONDecoder().decode([PhotoResult].self, from: data)
-                        
+                        print(decodedData)
                         for photo in decodedData {
                             self.photos.append(Photo(photoResult: photo))
                         }

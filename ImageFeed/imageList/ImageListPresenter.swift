@@ -50,7 +50,10 @@ class ImageListPresenter: ImageListPresenterProtocol{
         return cellHeight
     }
     
-    func shouldUpdate(tableView: UITableView){
+    func shouldUpdate(tableView: UITableView?){
+        
+        guard let tableView = tableView else {return}
+        
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos

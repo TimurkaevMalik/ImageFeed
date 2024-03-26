@@ -21,6 +21,8 @@ protocol ImageListPresenterProtocol: AnyObject {
     
     func configCellHeight(tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     
+    func shouldUpdate(tableView: UITableView?)
+    
     func fetchImages()
 }
 
