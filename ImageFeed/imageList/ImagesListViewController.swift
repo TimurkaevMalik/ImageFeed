@@ -26,22 +26,7 @@ class ImagesListViewController: UIViewController {
     }
     
     func updateTableViewAnimated() {
-        
-        let oldCount = presenter.photos.count
-        let newCount = imagesListService.photos.count
-        presenter.photos = imagesListService.photos
-        
-        if oldCount != newCount {
-            tableView.performBatchUpdates {
-                var indexPath: [IndexPath] = []
-                
-                for i in oldCount..<newCount {
-                    indexPath.append(IndexPath(row: i, section: 0))
-                }
-                tableView.insertRows(at: indexPath, with: .automatic)
-            } completion: { _ in
-            }
-        }
+        presenter.shouldUpdate(tableView: tableView)
     }
     
     

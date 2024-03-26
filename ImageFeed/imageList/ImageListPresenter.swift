@@ -11,8 +11,8 @@ import UIKit
 class ImageListPresenter: ImageListPresenterProtocol{
     
     var photos: [Photo] = []
-    private let dateFormatter = DateFormatManager.shared
     let imagesListService = ImagesListService.shared
+    private let dateFormatter = DateFormatManager.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
 
     
@@ -48,6 +48,24 @@ class ImageListPresenter: ImageListPresenterProtocol{
         let cellHeight = imageSize.height * scale + imageInsets.top + imageInsets.bottom
         
         return cellHeight
+    }
+    
+    func shouldUpdate(tableView: UITableView){
+        let oldCount = photos.count
+        let newCount = imagesListService.photos.count
+        photos = imagesListService.photos
+        
+        if oldCount != newCount {
+            tableView.performBatchUpdates {
+                var indexPath: [IndexPath] = []
+                
+                for i in oldCount..<newCount {
+                    indexPath.append(IndexPath(row: i, section: 0))
+                }
+                tableView.insertRows(at: indexPath, with: .automatic)
+            } completion: { _ in
+            }
+        }
     }
     
     func changeLikeRequest(indexPath: IndexPath, cell: ImagesListCell) {
