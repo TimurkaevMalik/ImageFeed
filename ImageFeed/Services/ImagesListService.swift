@@ -44,7 +44,9 @@ final class ImagesListService {
             
             DispatchQueue.main.async {
                 
-                guard let self = self else {return}
+                guard let self = self else {
+                    return
+                }
                 
                 if let error = error {
                     comletion(.failure(error))
@@ -62,11 +64,12 @@ final class ImagesListService {
                     do {
                         
                         let decodedData = try JSONDecoder().decode([PhotoResult].self, from: data)
-                        print(decodedData)
+                        
                         for photo in decodedData {
                             self.photos.append(Photo(photoResult: photo))
                         }
 
+                        print(self.photos)
                         NotificationCenter.default.post(
                             name: ImagesListService.didChangeNotification,
                             object: self,

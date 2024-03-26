@@ -38,25 +38,43 @@ final class ImagesListTests: XCTestCase {
 //        let viewController = ImagesListViewController()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
-        let presenter = ImageListPresenterTest()
+//        let presenter = ImageListPresenter()
         
         let tableView = UITableView()
-        let cell = ImagesListCell()
+//        let cell = ImagesListCell()
 
-        let indexPath = IndexPath(row: 1, section: 0)
+//        let indexPath = IndexPath(row: 1, section: 0)
         
-        viewController.presenter = presenter
-        viewController.tableView = tableView
-        
-        
-        viewController.tableView(tableView, numberOfRowsInSection: 0)
-        viewController.tableView(tableView, cellForRowAt: indexPath)
+//        viewController.presenter = presenter
+//        viewController.tableView = tableView
+        _ = viewController.view
+        sleep(10)
+//        viewController.tableView(tableView, numberOfRowsInSection: 0)
+//        viewController.tableView(tableView, cellForRowAt: indexPath)
 
-        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 2)
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 10)
+    }
+    
+    
+    func testFetchImages(){
+        let presenter = ImageListPresenter()
+        let imagesListService = ImagesListService.shared
+        
+        XCTAssertEqual(presenter.imagesListService.photos.count, 0)
+        
+        presenter.fetchImages()
+        
+        sleep(10)
+        
+        XCTAssertEqual(presenter.imagesListService.photos.count, 10)
     }
 }
 
 class ImageListPresenterTest: ImageListPresenterProtocol {
+    
+    let imagesListService = ImagesListService.shared
+    private let dateFormatter = DateFormatManager.shared
+    private let oauth2TokenStorage = OAuth2TokenStorage()
     
     var photos: [ImageFeed.Photo] = [
         Photo(photoResult: PhotoResult(
@@ -81,8 +99,6 @@ class ImageListPresenterTest: ImageListPresenterProtocol {
                 full: "https://images.unsplash.com/photo-1710975090671-9cb58989180d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w1NjQ0NDd8MHwxfGFsbHwyfHx8fHx8Mnx8MTcxMTQ3MTc1NXw&ixlib=rb-4.0.3&q=85"),
             isLiked: false))
     ]
-    
-    private let dateFormatter = DateFormatManager.shared
     
     var didCallMakeCell = false
     var didCallShouldUpdate = false
@@ -114,5 +130,8 @@ class ImageListPresenterTest: ImageListPresenterProtocol {
     }
     
     func fetchImages() {
+        guard let token = oauth2TokenStorage.token else {return}
+        
+        imagesListService.fetchPhotosNextPage(token: token) { _ in}
     }
 }
