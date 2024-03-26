@@ -9,12 +9,15 @@ import Foundation
 
 final class ImagesListService {
     
-    var photos: [Photo] = []
+    static let shared = ImagesListService()
+    private(set) var photos: [Photo] = []
     private let oauth2TokenStorage = OAuth2TokenStorage()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
     private var lastLoadedPage: Int?
     private var fetchingPhotosTask: URLSessionTask?
+    
+    private init(){}
     
     private enum ImagesListServiceError: Error {
         case codeError
@@ -23,7 +26,7 @@ final class ImagesListService {
     }
     
     func removePhotos(){
-        photos.removeAll()
+        self.photos.removeAll()
     }
     
     func fetchPhotosNextPage(token: String, comletion: @escaping (Result<[Photo],Error>) -> Void) {
@@ -63,7 +66,7 @@ final class ImagesListService {
                         for photo in decodedData {
                             self.photos.append(Photo(photoResult: photo))
                         }
-                        
+
                         NotificationCenter.default.post(
                             name: ImagesListService.didChangeNotification,
                             object: self,
@@ -111,7 +114,7 @@ final class ImagesListService {
                         
                         let decodedData = try JSONDecoder().decode(SinglePhotoDecoder.self, from: data)
                         
-                        
+
                         if let index = self.photos.firstIndex(where: { $0.id == photoId }) {
                             
                             var photo = self.photos[index]
@@ -122,6 +125,9 @@ final class ImagesListService {
                             self.photos.insert(photo, at: index)
                             
                             completion(.success(print("")))
+                        } else {
+                            print("FAILED")
+                            completion(.failure(ImagesListServiceError.codeError))
                         }
                     } catch {
                         completion(.failure(ImagesListServiceError.codeError))
@@ -152,7 +158,7 @@ final class ImagesListService {
         
         urlComponents?.queryItems = [
             URLQueryItem(name: "page", value: "\(pageNumber)"),
-            URLQueryItem(name: "per_page", value: "10"),
+            URLQueryItem(name: "per_page", value: "2"),
             URLQueryItem(name: "order_by", value: "latest")
         ]
         

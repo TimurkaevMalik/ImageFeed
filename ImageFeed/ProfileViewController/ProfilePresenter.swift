@@ -24,16 +24,6 @@ class ProfilePresenter: ProfilePresenterProtocol {
         return url
     }
     
-    private func switchToSplashController() {
-        
-        guard let window = UIApplication.shared.windows.first else {
-            assertionFailure("Invalid Configuration")
-            return
-        }
-        
-        window.rootViewController = SplashViewController()
-    }
-    
     func logoutAlert(){
         let message = "Уверены что хотите выйти?"
         let title = "Пока, пока!"
@@ -50,5 +40,15 @@ class ProfilePresenter: ProfilePresenterProtocol {
                 self.switchToSplashController()
             }
         ))
+    }
+    
+    private func switchToSplashController() {
+        
+        guard let window = UIApplication.shared.windows.first else {
+            assertionFailure("Invalid Configuration")
+            return
+        }
+        
+        window.rootViewController = SplashViewController()
     }
 }
