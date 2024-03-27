@@ -161,7 +161,7 @@ final class ImagesListService {
         
         urlComponents?.queryItems = [
             URLQueryItem(name: "page", value: "\(pageNumber)"),
-            URLQueryItem(name: "per_page", value: "5"),
+            URLQueryItem(name: "per_page", value: "10"),
             URLQueryItem(name: "order_by", value: "latest")
         ]
         

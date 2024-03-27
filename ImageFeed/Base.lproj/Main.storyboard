@@ -157,6 +157,7 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLo-Z0-fps" userLabel="Back Button">
                                 <rect key="frame" x="4" y="55" width="48" height="48"/>
+                                <accessibility key="accessibilityConfiguration" identifier="navBackButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="pkk-Yr-UTM"/>
                                     <constraint firstAttribute="width" constant="48" id="qkl-MP-BST"/>

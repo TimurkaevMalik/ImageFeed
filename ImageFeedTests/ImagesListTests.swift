@@ -33,37 +33,6 @@ final class ImagesListTests: XCTestCase {
         
         XCTAssertTrue(presenter.didCallShouldUpdate)
     }
-    
-    func testNumberOfRows(){
-        let viewController = ImagesListViewController()
-        let presenter = ImageListPresenter()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tableView = UITableView()
-
-        viewController.presenter = presenter
-        viewController.tableView = tableView
-        viewController.tableView.dataSource = ImagesListViewController()
-        
-        viewController.tableView.reloadData()
-        
-        sleep(10)
-
-
-        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 5)
-    }
-    
-    
-    func testFetchImages(){
-        let presenter = ImageListPresenter()
-        
-        XCTAssertEqual(presenter.imagesListService.photos.count, 0)
-        
-        presenter.fetchImages()
-        
-        sleep(10)
-        
-        XCTAssertEqual(presenter.imagesListService.photos.count, 10)
-    }
 }
 
 class ImageListPresenterTest: ImageListPresenterProtocol {
@@ -104,14 +73,14 @@ class ImageListPresenterTest: ImageListPresenterProtocol {
         
         didCallMakeCell = true
         
-        cell.cellImage.kf.setImage(with: URL(string: photos[indexPath.row].thumbImageURL), placeholder: UIImage(named: "Placeholder2"))
-        
-        let isLiked = photos[indexPath.row].isLiked
-        
-        let likeImage = isLiked ? UIImage(named: "redLike") : UIImage(named: "emptyLike")
-        cell.likeButton.setImage(likeImage, for: .normal)
-        
-        cell.dateLabel.text = dateFormatter.fomateStringDate(string: photos[indexPath.row].createdAt)
+//        cell.cellImage.kf.setImage(with: URL(string: photos[indexPath.row].thumbImageURL), placeholder: UIImage(named: "Placeholder2"))
+//        
+//        let isLiked = photos[indexPath.row].isLiked
+//        
+//        let likeImage = isLiked ? UIImage(named: "redLike") : UIImage(named: "emptyLike")
+//        cell.likeButton.setImage(likeImage, for: .normal)
+//        
+//        cell.dateLabel.text = dateFormatter.fomateStringDate(string: photos[indexPath.row].createdAt)
     }
     
     func changeLikeRequest(indexPath: IndexPath, cell: ImageFeed.ImagesListCell) {

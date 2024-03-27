@@ -31,6 +31,7 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         view.backgroundColor = UIColor(named: "YPBlack")
         
         logoutButton = UIButton.systemButton(with: UIImage(named: "logout_button")!, target: self, action: #selector(didTapLogoutButton))
+        logoutButton.accessibilityIdentifier = "LogoutRedButton"
         
         avatarImageView.layer.masksToBounds = true
         avatarImageView.layer.cornerRadius = 35

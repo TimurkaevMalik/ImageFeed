@@ -13,7 +13,7 @@ final class WebViewTests: XCTestCase {
 
 
     func testViewControllerCallsViewDidLoad(){
-        //given
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "WebViewViewController") as! WebViewViewController
         let presenter = WebViewPresenterSpy()
@@ -49,7 +49,7 @@ final class WebViewTests: XCTestCase {
         XCTAssertFalse(shoudHideProgress)
     }
     
-    func testProgressHiden() {
+    func testProgressHidenWhenOne() {
         let authHelper = AuthHelper()
         let presenter = WebViewPresenter(authHelper: authHelper)
         let progress: Float = 1.0

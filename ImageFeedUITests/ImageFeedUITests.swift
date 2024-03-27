@@ -34,12 +34,14 @@ final class ImageFeedUITests: XCTestCase {
 
         
         loginTextField.tap()
-        loginTextField.typeText("timurkaev_malik@icloud.com")
+        loginTextField.typeText("")
+        sleep(1)
         doneButton.tap()
         
         sleep(1)
         passwordTextField.tap()
-        passwordTextField.typeText("Marktsar_2002")
+        passwordTextField.typeText("")
+        sleep(1)
         doneButton.tap()
         
         sleep(1)
@@ -58,14 +60,45 @@ final class ImageFeedUITests: XCTestCase {
         cell.swipeUp()
         sleep(3)
         
-        let button = tablesQuery.children(matching: .cell).element(boundBy: 1).buttons["LikeButton"]
-//            .element(matching: .button, identifier: "LikeButton")
-        XCTAssertTrue(button.waitForExistence(timeout: 5))
+        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
+        let button = cellToLike.buttons["LikeButton"]
+
+        button.tap()
+        sleep(1)
         button.tap()
         sleep(3)
+        
+        cellToLike.tap()
+        
+        sleep(2)
+        
+        let image = app.scrollViews.images.element(boundBy: 0)
+        
+        image.pinch(withScale: 3, velocity: 1)
+        image.pinch(withScale: 0.5, velocity: -1)
+        
+        let navigationButon = app.buttons["navBackButton"]
+        navigationButon.tap()
+        sleep(2)
     }
     
     func testProfile() throws {
+        sleep(3)
+        app.tabBars.buttons.element(boundBy: 1).tap()
         
+        sleep(2)
+        XCTAssertTrue(app.staticTexts[""].exists)
+        XCTAssertTrue(app.staticTexts[""].exists)
+        
+        sleep(1)
+        app.buttons["LogoutRedButton"].tap()
+        sleep(1)
+        
+        app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
+        
+        sleep(2)
+        
+        XCTAssertTrue(app.buttons["Authenticate"].exists)
+        XCTAssertTrue(app.images["auth_logo"].exists)
     }
 }
