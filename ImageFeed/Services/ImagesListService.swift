@@ -70,6 +70,7 @@ final class ImagesListService {
                         }
 
                         print(self.photos)
+                        
                         NotificationCenter.default.post(
                             name: ImagesListService.didChangeNotification,
                             object: self,
@@ -77,6 +78,7 @@ final class ImagesListService {
                         
                         comletion(.success(self.photos))
                     } catch {
+                        print("ERROR WHILE DECODING")
                         comletion(.failure(ImagesListServiceError.codeError))
                     }
                 }
@@ -161,7 +163,7 @@ final class ImagesListService {
         
         urlComponents?.queryItems = [
             URLQueryItem(name: "page", value: "\(pageNumber)"),
-            URLQueryItem(name: "per_page", value: "10"),
+            URLQueryItem(name: "per_page", value: "2"),
             URLQueryItem(name: "order_by", value: "latest")
         ]
         

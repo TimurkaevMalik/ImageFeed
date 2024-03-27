@@ -33,6 +33,39 @@ final class ImagesListTests: XCTestCase {
         
         XCTAssertTrue(presenter.didCallShouldUpdate)
     }
+    
+    func testNumberOfRows(){
+    
+        let presenter = ImageListPresenterTest()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
+        let tableView = UITableView()
+
+        
+        viewController.presenter = presenter
+        viewController.tableView = tableView
+        
+        viewController.tableView.dataSource = ImagesListViewController()
+        viewController.tableView.delegate = ImagesListViewController()
+        
+        viewController.tableView.reloadData()
+        
+        sleep(10)
+
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 2)
+    }
+    
+    func testFetchImages(){
+        let presenter = ImageListPresenter()
+        
+        XCTAssertEqual(presenter.imagesListService.photos.count, 0)
+        
+        presenter.fetchImages()
+        
+        sleep(10)
+        
+        XCTAssertEqual(presenter.imagesListService.photos.count, 10)
+    }
 }
 
 class ImageListPresenterTest: ImageListPresenterProtocol {
