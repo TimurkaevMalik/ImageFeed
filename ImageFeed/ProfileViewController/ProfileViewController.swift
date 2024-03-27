@@ -8,17 +8,19 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
     
-    private lazy var avatarImageView = UIImageView()
-    private lazy var nameLabel = UILabel()
-    private lazy var loginNameLabel = UILabel()
-    private lazy var descriptionLabel = UILabel()
-    private lazy var logoutButton = UIButton()
+    var presenter: ProfilePresenterProtocol?
+    
+    lazy var avatarImageView = UIImageView()
+    lazy var nameLabel = UILabel()
+    lazy var loginNameLabel = UILabel()
+    lazy var descriptionLabel = UILabel()
+    lazy var logoutButton = UIButton()
     
     private var profileImageServeceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
-    private let profileLogoutService = ProfileLogoutService.shared
+
     private let profileService = ProfileService.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let alertPresenter = AlertPresenter()
@@ -29,6 +31,7 @@ final class ProfileViewController: UIViewController {
         view.backgroundColor = UIColor(named: "YPBlack")
         
         logoutButton = UIButton.systemButton(with: UIImage(named: "logout_button")!, target: self, action: #selector(didTapLogoutButton))
+        logoutButton.accessibilityIdentifier = "LogoutRedButton"
         
         avatarImageView.layer.masksToBounds = true
         avatarImageView.layer.cornerRadius = 35
@@ -96,28 +99,18 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.text = profile.bio
     }
     
-    private func updateAvatar() {
-        guard let profileImageURL = profileImageService.avatarURL,
-              let url = URL(string: profileImageURL)
-        else {return}
+    func updateAvatar() {
+        guard let url = presenter?.avatarURL() else {return}
         
         let processor = RoundCornerImageProcessor(cornerRadius: 450)
         
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.processor(processor)])
     }
     
-    private func switchToSplashController() {
-        
-        guard let window = UIApplication.shared.windows.first else {
-            assertionFailure("Invalid Configuration")
-            return
-        }
-        
-        window.rootViewController = SplashViewController()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = ProfilePresenter()
+        presenter?.view = self
         
         profileImageServeceObserver = NotificationCenter.default.addObserver(
             forName: ProfileImageService.didChangeNotification,
@@ -132,21 +125,6 @@ final class ProfileViewController: UIViewController {
     }
     
     @objc func didTapLogoutButton() {
-        
-        let message = "Уверены что хотите выйти?"
-        let title = "Пока, пока!"
-        let buttonText = "Да"
-        let cancelButtonText = "Нет"
-        
-        alertPresenter.showAlert(vc: self, result: AlertModel(
-            message: message,
-            title: title,
-            buttonText: buttonText,
-            cancelButtonText: cancelButtonText,
-            completion: {
-                self.profileLogoutService.logOut()
-                self.switchToSplashController()
-            }
-        ))
-    }
+        presenter?.logoutAlert()
+    }    
 }
