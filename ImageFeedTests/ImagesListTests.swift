@@ -35,30 +35,26 @@ final class ImagesListTests: XCTestCase {
     }
     
     func testNumberOfRows(){
-//        let viewController = ImagesListViewController()
+        let viewController = ImagesListViewController()
+        let presenter = ImageListPresenter()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
-//        let presenter = ImageListPresenter()
-        
         let tableView = UITableView()
-//        let cell = ImagesListCell()
 
-//        let indexPath = IndexPath(row: 1, section: 0)
+        viewController.presenter = presenter
+        viewController.tableView = tableView
+        viewController.tableView.dataSource = ImagesListViewController()
         
-//        viewController.presenter = presenter
-//        viewController.tableView = tableView
-        _ = viewController.view
+        viewController.tableView.reloadData()
+        
         sleep(10)
-//        viewController.tableView(tableView, numberOfRowsInSection: 0)
-//        viewController.tableView(tableView, cellForRowAt: indexPath)
 
-        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 10)
+
+        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 5)
     }
     
     
     func testFetchImages(){
         let presenter = ImageListPresenter()
-        let imagesListService = ImagesListService.shared
         
         XCTAssertEqual(presenter.imagesListService.photos.count, 0)
         

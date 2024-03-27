@@ -10,6 +10,7 @@ import UIKit
 
 class ImageListPresenter: ImageListPresenterProtocol{
     
+    
     var photos: [Photo] = []
     let imagesListService = ImagesListService.shared
     private let dateFormatter = DateFormatManager.shared
@@ -19,7 +20,9 @@ class ImageListPresenter: ImageListPresenterProtocol{
     func fetchImages() {
         guard let token = oauth2TokenStorage.token else {return}
         
-        imagesListService.fetchPhotosNextPage(token: token) { _ in}
+        imagesListService.fetchPhotosNextPage(token: token) { result in
+            
+        }
     }
     
     

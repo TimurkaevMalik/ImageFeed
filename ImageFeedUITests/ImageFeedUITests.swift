@@ -52,7 +52,17 @@ final class ImageFeedUITests: XCTestCase {
     }
     
     func testFeed() throws {
+        let tablesQuery = app.tables
+        let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
+        XCTAssertTrue(cell.waitForExistence(timeout: 5))
+        cell.swipeUp()
+        sleep(3)
         
+        let button = tablesQuery.children(matching: .cell).element(boundBy: 1).buttons["LikeButton"]
+//            .element(matching: .button, identifier: "LikeButton")
+        XCTAssertTrue(button.waitForExistence(timeout: 5))
+        button.tap()
+        sleep(3)
     }
     
     func testProfile() throws {
