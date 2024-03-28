@@ -33,6 +33,18 @@ final class ImagesListTests: XCTestCase {
         XCTAssertTrue(presenter.didCallShouldUpdate)
     }
     
+    func testDidCallFetchImages(){
+        let presenter = ImageListPresenterTest()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
+        
+        
+        viewController.configure(presenter)
+        _ = viewController.view
+        
+        XCTAssertTrue(presenter.didCallfetchImages)
+    }
+    
     func testNumberOfRows(){
         let presenter = ImageListPresenterTest()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -43,9 +55,42 @@ final class ImagesListTests: XCTestCase {
         
         XCTAssertEqual(viewController.tableView.numberOfRows(inSection: 0), 2)
     }
+    
+    
+    
+    func testFetchesImagesAndUpdatesPhotosArray(){
+        
+        let presenter = ImageListPresenter.shared
+        let imagesListService = ImagesListService.shared
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
+        
+        let expectation = self.expectation(description: "Wait for Notification")
+        NotificationCenter.default.addObserver(
+            forName: ImagesListService.didChangeNotification,
+            object: nil,
+            queue: .main) { _ in
+                expectation.fulfill()
+            }
+
+        XCTAssertEqual(imagesListService.photos.count, 0)
+        XCTAssertEqual(presenter.photos.count, 0)
+        
+        presenter.fetchImages()
+                
+        wait(for: [expectation], timeout: 10)
+        sleep(10)
+        XCTAssertEqual(presenter.photos.count, 5)
+    }
 }
 
 class ImageListPresenterTest: ImageListPresenterProtocol {
+    
+    var didCallfetchImages = false
+    var didCallMakeCell = false
+    var didCallShouldUpdate = false
+    var didCallChangeLikeRequest = false
     
     let imagesListService = ImagesListService.shared
     private let dateFormatter = DateFormatManager.shared
@@ -75,10 +120,6 @@ class ImageListPresenterTest: ImageListPresenterProtocol {
             isLiked: false))
     ]
     
-    var didCallMakeCell = false
-    var didCallShouldUpdate = false
-    var didCallChangeLikeRequest = false
-    
     func makeCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
         didCallMakeCell = true
@@ -96,5 +137,6 @@ class ImageListPresenterTest: ImageListPresenterProtocol {
     }
     
     func fetchImages() {
+        didCallfetchImages = true
     }
 }

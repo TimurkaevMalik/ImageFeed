@@ -16,13 +16,16 @@ class ImagesListViewController: UIViewController {
     let imagesListService = ImagesListService.shared
     private var imagesListServiceObserver: NSObjectProtocol?
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
-
+    var didViewLoad = false
 
     func configure(_ presenter: ImageListPresenterProtocol){
         self.presenter = presenter
     }
     
-    func addObserver(){
+    func shouldAddObserver(_ bool: Bool){
+        
+        guard bool == true else {return}
+        
         imagesListServiceObserver = NotificationCenter.default.addObserver(
             forName: ImagesListService.didChangeNotification,
             object: nil,
@@ -42,6 +45,11 @@ class ImagesListViewController: UIViewController {
         presenter?.shouldUpdate(tableView: tableView)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        super.viewDidAppear(animated)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
