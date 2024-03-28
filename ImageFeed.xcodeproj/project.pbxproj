@@ -231,6 +231,15 @@
 			path = ImagesListTest;
 			sourceTree = "<group>";
 		};
+		BC4C95A12BB5F082000A6DC5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BCCAB5472BAE0DD400EC015C /* AuthProtocols.swift */,
+				BC0CD9AB2B73E11E00252F81 /* AuthConfiguration.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BC7BD3F82BB2776F00E31A0F /* SplashViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				BC8304692BB2250000CE817B /* ProfileProtocols.swift */,
+				BC35353D2BA47E7E00D3567F /* ProfileLogoutService.swift */,
 				BC323E512B5F919100F034EA /* ProfileViewController.swift */,
 				BC83046C2BB225AC00CE817B /* ProfilePresenter.swift */,
 			);
@@ -304,7 +314,6 @@
 			children = (
 				BCAE633A2B911C3800C5B12E /* ProfileService.swift */,
 				BCB303AA2B9210F100408095 /* ProfileImageService.swift */,
-				BC35353D2BA47E7E00D3567F /* ProfileLogoutService.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -351,8 +360,7 @@
 		BCDFF33F2B762DD300B99B7D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				BCCAB5472BAE0DD400EC015C /* AuthProtocols.swift */,
-				BC0CD9AB2B73E11E00252F81 /* AuthConfiguration.swift */,
+				BC4C95A12BB5F082000A6DC5 /* Models */,
 				BC76432D2BB1B014007A9C31 /* AuthHelper.swift */,
 				BCDFF33D2B762CFD00B99B7D /* AuthViewController.swift */,
 				BC1223CA2B77A47A0084F702 /* WebViewViewController.swift */,

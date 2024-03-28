@@ -9,9 +9,9 @@ import Foundation
 
 
 final class AuthHelper: AuthHelperProtocol {
-    let configuration: AuthConfiguration
+    private let configuration: AuthConfiguration
     
-    init(configuration: AuthConfiguration = .standard) {
+    init(configuration: AuthConfiguration) {
         self.configuration = configuration
     }
     

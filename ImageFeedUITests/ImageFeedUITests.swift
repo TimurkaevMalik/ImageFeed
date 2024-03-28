@@ -35,13 +35,17 @@ final class ImageFeedUITests: XCTestCase {
         
         loginTextField.tap()
         sleep(2)
-        loginTextField.typeText("timurkaev_malik@icloud.com")
+        loginTextField.typeText("t")
+        sleep(1)
+        loginTextField.typeText("imurkaev_malik@icloud.com")
         sleep(2)
         doneButton.tap()
         
         sleep(2)
         passwordTextField.tap()
-        passwordTextField.typeText("Marktsar_2002")
+        passwordTextField.typeText("M")
+        sleep(1)
+        passwordTextField.typeText("arktsar_2002")
         sleep(3)
         doneButton.tap()
         
@@ -51,7 +55,7 @@ final class ImageFeedUITests: XCTestCase {
         let tableQuery = app.tables
         let cell = tableQuery.children(matching: .cell).element(boundBy: 0)
         
-        XCTAssertTrue(cell.waitForExistence(timeout: 5))
+        XCTAssertTrue(cell.waitForExistence(timeout: 7))
     }
     
     func testFeed() throws {

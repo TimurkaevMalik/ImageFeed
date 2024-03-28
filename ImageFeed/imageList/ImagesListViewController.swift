@@ -45,12 +45,6 @@ final class ImagesListViewController: UIViewController {
         presenter?.shouldUpdate(tableView: tableView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        super.viewDidAppear(animated)
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
