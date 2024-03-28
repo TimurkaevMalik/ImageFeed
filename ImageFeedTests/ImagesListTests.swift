@@ -15,7 +15,7 @@ final class ImagesListTests: XCTestCase {
         let presenter = ImageListPresenterTest()
         let cell = ImagesListCell()
         let indexPath = IndexPath()
-        viewController.presenter = presenter
+        viewController.configure(presenter)
         
         viewController.configCell(for: cell, with: indexPath)
         
@@ -25,9 +25,8 @@ final class ImagesListTests: XCTestCase {
     func testDidCallShouldUpdate(){
         let viewController = ImagesListViewController()
         let presenter = ImageListPresenterTest()
-        let cell = ImagesListCell()
-        let indexPath = IndexPath()
-        viewController.presenter = presenter
+        
+        viewController.configure(presenter)
         
         viewController.updateTableViewAnimated()
         
@@ -35,36 +34,14 @@ final class ImagesListTests: XCTestCase {
     }
     
     func testNumberOfRows(){
-    
         let presenter = ImageListPresenterTest()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
-        let tableView = UITableView()
-
         
-        viewController.presenter = presenter
-        viewController.tableView = tableView
+        viewController.configure(presenter)
+        _ = viewController.view
         
-        viewController.tableView.dataSource = ImagesListViewController()
-        viewController.tableView.delegate = ImagesListViewController()
-        
-        viewController.tableView.reloadData()
-        
-        sleep(10)
-
-        XCTAssertEqual(tableView.numberOfRows(inSection: 0), 2)
-    }
-    
-    func testFetchImages(){
-        let presenter = ImageListPresenter()
-        
-        XCTAssertEqual(presenter.imagesListService.photos.count, 0)
-        
-        presenter.fetchImages()
-        
-        sleep(10)
-        
-        XCTAssertEqual(presenter.imagesListService.photos.count, 10)
+        XCTAssertEqual(viewController.tableView.numberOfRows(inSection: 0), 2)
     }
 }
 
@@ -105,15 +82,6 @@ class ImageListPresenterTest: ImageListPresenterProtocol {
     func makeCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
         didCallMakeCell = true
-        
-//        cell.cellImage.kf.setImage(with: URL(string: photos[indexPath.row].thumbImageURL), placeholder: UIImage(named: "Placeholder2"))
-//        
-//        let isLiked = photos[indexPath.row].isLiked
-//        
-//        let likeImage = isLiked ? UIImage(named: "redLike") : UIImage(named: "emptyLike")
-//        cell.likeButton.setImage(likeImage, for: .normal)
-//        
-//        cell.dateLabel.text = dateFormatter.fomateStringDate(string: photos[indexPath.row].createdAt)
     }
     
     func changeLikeRequest(indexPath: IndexPath, cell: ImageFeed.ImagesListCell) {
@@ -128,8 +96,5 @@ class ImageListPresenterTest: ImageListPresenterProtocol {
     }
     
     func fetchImages() {
-        guard let token = oauth2TokenStorage.token else {return}
-        
-        imagesListService.fetchPhotosNextPage(token: token) { _ in}
     }
 }

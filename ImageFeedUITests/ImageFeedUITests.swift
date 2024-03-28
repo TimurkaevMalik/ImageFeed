@@ -34,13 +34,15 @@ final class ImageFeedUITests: XCTestCase {
 
         
         loginTextField.tap()
-        loginTextField.typeText("")
+        sleep(1)
+        loginTextField.typeText("timurkaev_malik@icloud.com")
         sleep(1)
         doneButton.tap()
         
         sleep(1)
         passwordTextField.tap()
-        passwordTextField.typeText("")
+        sleep(1)
+        passwordTextField.typeText("Marktsar_2002")
         sleep(1)
         doneButton.tap()
         
@@ -62,6 +64,7 @@ final class ImageFeedUITests: XCTestCase {
         
         let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
         let button = cellToLike.buttons["LikeButton"]
+
 
         button.tap()
         sleep(1)
@@ -87,8 +90,8 @@ final class ImageFeedUITests: XCTestCase {
         app.tabBars.buttons.element(boundBy: 1).tap()
         
         sleep(2)
-        XCTAssertTrue(app.staticTexts[""].exists)
-        XCTAssertTrue(app.staticTexts[""].exists)
+        XCTAssertTrue(app.staticTexts["Malik Timurkaev"].exists)
+        XCTAssertTrue(app.staticTexts["@malik_timurkaev"].exists)
         
         sleep(1)
         app.buttons["LogoutRedButton"].tap()

@@ -7,176 +7,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "475D9FC5-EDC7-4C94-AB61-E2DACAC35190"
+            uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ImageFeed/Services/ImagesListService.swift"
+            filePath = "ImageFeedTests/ImagesListTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "fetchPhotosNextPage(token:comletion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2AA1B4D6-6300-4458-85A2-6FD646328221"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ImageFeed/Services/ImagesListService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "fetchPhotosNextPage(token:comletion:)"
-            landmarkType = "7">
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "ImageListPresenterTest"
+            landmarkType = "3">
             <Locations>
                <Location
-                  uuid = "2AA1B4D6-6300-4458-85A2-6FD646328221 - cffcdba40e602106"
+                  uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b07511acb"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "ImageFeed.ImagesListService.fetchPhotosNextPage(token: Swift.String, comletion: (Swift.Result&lt;Swift.Array&lt;ImageFeed.Photo&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "ImageFeed"
+                  symbolName = "ImageFeedTests.ImageListPresenterTest.configCellHeight(tableView: __C.UITableView, heightForRowAt: Foundation.IndexPath) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "ImageFeedTests"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeed/Services/ImagesListService.swift"
+                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeedTests/ImagesListTests.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "960">
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "32">
                </Location>
                <Location
-                  uuid = "2AA1B4D6-6300-4458-85A2-6FD646328221 - fc97cc73306c27b1"
+                  uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b07511a28"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ImageFeed.ImagesListService.fetchPhotosNextPage(token: Swift.String, comletion: (Swift.Result&lt;Swift.Array&lt;ImageFeed.Photo&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "ImageFeed"
+                  symbolName = "ImageFeedTests.ImageListPresenterTest.configCellHeight(tableView: __C.UITableView, heightForRowAt: Foundation.IndexPath) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "ImageFeedTests"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeed/Services/ImagesListService.swift"
+                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeedTests/ImagesListTests.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "236">
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "32">
                </Location>
                <Location
-                  uuid = "2AA1B4D6-6300-4458-85A2-6FD646328221 - 7926c87d1fdf99c0"
+                  uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b07511aea"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ImageFeed.ImagesListService.fetchPhotosNextPage(token: Swift.String, comletion: (Swift.Result&lt;Swift.Array&lt;ImageFeed.Photo&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "ImageFeed"
+                  symbolName = "ImageFeedTests.ImageListPresenterTest.configCellHeight(tableView: __C.UITableView, heightForRowAt: Foundation.IndexPath) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "ImageFeedTests"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeed/Services/ImagesListService.swift"
+                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeedTests/ImagesListTests.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
-                  offsetFromSymbolStart = "184">
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b075119d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageFeedTests.ImageListPresenterTest.configCellHeight(tableView: __C.UITableView, heightForRowAt: Foundation.IndexPath) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "ImageFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeedTests/ImagesListTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "32">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FD09629F-3300-499A-9636-724340A67D03"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ImageFeed/Services/ImagesListService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "fetchPhotosNextPage(token:comletion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6DC380C7-9F8E-4DC3-A2ED-44290C87C23F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ImageFeed/Services/ImagesListService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "fetchPhotosNextPage(token:comletion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3168C866-56F9-41A0-AD00-BA715E65D485"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ImageFeed/Services/ImagesListService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "fetchPhotosNextPage(token:comletion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "022E53F8-0D6D-430D-B557-21BA3E6C8B66"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ImageFeed/Services/ImagesListService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "fetchPhotosNextPage(token:comletion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0E47EFD0-CF79-4361-ABEC-D3163F74515A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ImageFeed/Services/ImagesListService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "fetchPhotosNextPage(token:comletion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9215A716-FA6E-4907-AABA-1AB8FA2CB3B5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ImageFeed/Services/ImagesListService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "fetchPhotosNextPage(token:comletion:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
