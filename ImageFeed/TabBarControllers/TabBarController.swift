@@ -20,8 +20,8 @@ final class TabBarController: UITabBarController {
             return
         }
         
-        imagesListViewController.configure(ImageListPresenter())
-        imagesListViewController.addObserver()
+        imagesListViewController.configure(ImageListPresenter.shared)
+        imagesListViewController.shouldAddObserver(true)
         
         let profileViewController = ProfileViewController()
         
