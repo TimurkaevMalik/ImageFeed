@@ -9,7 +9,7 @@
 import XCTest
 
 final class ProfileViewTests: XCTestCase {
-
+    
     func testDidCallLogoutMethod(){
         let presenter = ProfilePresenterSpy()
         let viewController = ProfileViewController()
@@ -40,23 +40,5 @@ final class ProfileViewTests: XCTestCase {
         XCTAssertEqual(viewController.nameLabel.text, profile.name)
         XCTAssertEqual(viewController.loginNameLabel.text, "@\(profile.userName)")
         XCTAssertEqual(viewController.descriptionLabel.text, profile.bio)
-    }
-}
-
-
-class ProfilePresenterSpy: ProfilePresenterProtocol {
-    
-    var view: ImageFeed.ProfileViewControllerProtocol?
-    var logoutAlertWasCalled = false
-    var avatarURLMethodCalled = false
-    
-    func logoutAlert() {
-        logoutAlertWasCalled = true
-    }
-    
-    func avatarURL() -> URL? {
-        avatarURLMethodCalled = true
-        
-        return nil
     }
 }

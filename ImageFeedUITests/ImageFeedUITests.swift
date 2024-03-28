@@ -10,15 +10,15 @@ import XCTest
 final class ImageFeedUITests: XCTestCase {
     
     private let app = XCUIApplication()
-
+    
     override func setUpWithError() throws {
         continueAfterFailure = false
         app.launch()
     }
-
-
-    func testAuth() throws {
     
+    
+    func testAuth() throws {
+        
         app.buttons["Authenticate"].tap()
         
         let webView = app.webViews["UnsplashWebView"]
@@ -31,19 +31,18 @@ final class ImageFeedUITests: XCTestCase {
         XCTAssertTrue(webView.waitForExistence(timeout: 5))
         XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
         XCTAssertTrue(passwordTextField.waitForExistence(timeout: 5))
-
+        
         
         loginTextField.tap()
-        sleep(1)
-        loginTextField.typeText("")
-        sleep(1)
+        sleep(2)
+        loginTextField.typeText("timurkaev_malik@icloud.com")
+        sleep(2)
         doneButton.tap()
         
-        sleep(1)
+        sleep(2)
         passwordTextField.tap()
-        sleep(1)
-        passwordTextField.typeText("")
-        sleep(1)
+        passwordTextField.typeText("Marktsar_2002")
+        sleep(3)
         doneButton.tap()
         
         sleep(1)
@@ -62,10 +61,10 @@ final class ImageFeedUITests: XCTestCase {
         cell.swipeUp()
         sleep(3)
         
-        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
+        let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 2)
         let button = cellToLike.buttons["LikeButton"]
-
-
+        
+        
         button.tap()
         sleep(1)
         button.tap()
@@ -90,8 +89,8 @@ final class ImageFeedUITests: XCTestCase {
         app.tabBars.buttons.element(boundBy: 1).tap()
         
         sleep(2)
-        XCTAssertTrue(app.staticTexts[""].exists)
-        XCTAssertTrue(app.staticTexts[""].exists)
+        XCTAssertTrue(app.staticTexts["Malik Timurkaev"].exists)
+        XCTAssertTrue(app.staticTexts["@malik_timurkaev"].exists)
         
         sleep(1)
         app.buttons["LogoutRedButton"].tap()

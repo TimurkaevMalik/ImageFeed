@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ImagesListCell: UITableViewCell {
+final class ImagesListCell: UITableViewCell, ImagesListCellProtocol {
     
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var dateLabel: UILabel!

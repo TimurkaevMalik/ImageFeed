@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-class ImageListPresenter: ImageListPresenterProtocol{
+final class ImageListPresenter: ImageListPresenterProtocol{
     
     static let shared = ImageListPresenter()
     var photos: [Photo] = []
     let imagesListService = ImagesListService.shared
     private let dateFormatter = DateFormatManager.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
-
+    
     private init(){}
     
     func fetchImages() {
@@ -88,12 +88,14 @@ class ImageListPresenter: ImageListPresenterProtocol{
         }
     }
     
-    func changeLikeRequest(indexPath: IndexPath, cell: ImagesListCell) {
+    func changeLikeRequest(indexPath: IndexPath, cell: ImagesListCellProtocol) {
         
-        guard let token = oauth2TokenStorage.token else {return}
+        guard let token = oauth2TokenStorage.token else {
+            return
+        }
         
         let photo = photos[indexPath.row]
-        
+        print("✅✅✅\(photo.isLiked)")
         UIBlockingProgressHUD.show()
         imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked, token: token) { result in
             
@@ -101,8 +103,9 @@ class ImageListPresenter: ImageListPresenterProtocol{
             
             switch result{
                 
-            case .success:
+            case .success(let result):
                 self.photos = self.imagesListService.photos
+                print("✅✅✅\(self.photos[indexPath.row].isLiked)")
                 cell.setIsLiked(self.photos[indexPath.row].isLiked)
                 
             case .failure:

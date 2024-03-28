@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ProfilePresenterProtocol {
     var view: ProfileViewControllerProtocol? { get set }
-    func logoutAlert()
+    func logoutAlert(vc: UIViewController)
     func avatarURL() -> URL?
 }
 
 protocol ProfileViewControllerProtocol: AnyObject {
-    
+    func switchToSplashController()
 }

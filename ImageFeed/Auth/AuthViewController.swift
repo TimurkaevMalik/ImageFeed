@@ -8,7 +8,7 @@
 import UIKit
 
 
-class AuthViewController: UIViewController {
+final class AuthViewController: UIViewController {
     
     private var alertPresenter = AlertPresenter()
     private let oauth2Service = OAuth2Service()

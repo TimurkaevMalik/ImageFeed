@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class ImagesListViewController: UIViewController {
+final class ImagesListViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
@@ -17,7 +17,7 @@ class ImagesListViewController: UIViewController {
     private var imagesListServiceObserver: NSObjectProtocol?
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
     var didViewLoad = false
-
+    
     func configure(_ presenter: ImageListPresenterProtocol){
         self.presenter = presenter
     }
@@ -53,7 +53,7 @@ class ImagesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)

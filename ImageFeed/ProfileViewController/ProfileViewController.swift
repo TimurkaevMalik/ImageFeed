@@ -20,7 +20,7 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
     
     private var profileImageServeceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
-
+    
     private let profileService = ProfileService.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let alertPresenter = AlertPresenter()
@@ -107,6 +107,16 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"), options: [.processor(processor)])
     }
     
+    func switchToSplashController() {
+        
+        guard let window = UIApplication.shared.windows.first else {
+            assertionFailure("Invalid Configuration")
+            return
+        }
+        
+        window.rootViewController = SplashViewController()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = ProfilePresenter()
@@ -125,6 +135,6 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
     }
     
     @objc func didTapLogoutButton() {
-        presenter?.logoutAlert()
-    }    
+        presenter?.logoutAlert(vc: self)
+    }
 }

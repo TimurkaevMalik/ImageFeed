@@ -9,9 +9,10 @@
 import Foundation
 import XCTest
 
+
 final class WebViewTests: XCTestCase {
-
-
+    
+    
     func testViewControllerCallsViewDidLoad(){
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -83,37 +84,4 @@ final class WebViewTests: XCTestCase {
         
         XCTAssertEqual(code, "test code")
     }
-}
-
-
-class WebViewPresenterSpy: WebViewPresenterProtocol {
-    var viewDidLoadCalled: Bool = false
-    var view: WebViewViewControllerProtocol?
-    
-    func viewDidLoad() {
-        viewDidLoadCalled = true
-        
-        let request = URLRequest(url: URL(string: "nil")!)
-        view?.load(request: request)
-    }
-    
-    func didUpdateProgressValue(_ newValue: Double) {}
-    
-    func code(from url: URL) -> String? {
-        return nil
-    }
-}
-
-
-class WebViewViewControllerSpy: WebViewViewControllerProtocol {
-    var loadMethodCalled = false
-    var presenter: WebViewPresenterProtocol?
-    
-    func load(request: URLRequest) {
-        loadMethodCalled = true
-    }
-    
-    func setProgressValue(_ newValue: Float) {}
-    
-    func setProgressHidden(_ isHidden: Bool) {}
 }
