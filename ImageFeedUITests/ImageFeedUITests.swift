@@ -34,12 +34,14 @@ final class ImageFeedUITests: XCTestCase {
 
         
         loginTextField.tap()
+        sleep(1)
         loginTextField.typeText("")
         sleep(1)
         doneButton.tap()
         
         sleep(1)
         passwordTextField.tap()
+        sleep(1)
         passwordTextField.typeText("")
         sleep(1)
         doneButton.tap()
@@ -62,6 +64,7 @@ final class ImageFeedUITests: XCTestCase {
         
         let cellToLike = tablesQuery.children(matching: .cell).element(boundBy: 1)
         let button = cellToLike.buttons["LikeButton"]
+
 
         button.tap()
         sleep(1)

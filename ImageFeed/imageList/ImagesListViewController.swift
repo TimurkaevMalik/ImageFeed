@@ -12,12 +12,25 @@ class ImagesListViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    var presenter: ImageListPresenterProtocol?
+    private var presenter: ImageListPresenterProtocol?
     let imagesListService = ImagesListService.shared
     private var imagesListServiceObserver: NSObjectProtocol?
     private let ShowSingleImageSegueIdentifier = "ShowSingleImage"
 
 
+    func configure(_ presenter: ImageListPresenterProtocol){
+        self.presenter = presenter
+    }
+    
+    func addObserver(){
+        imagesListServiceObserver = NotificationCenter.default.addObserver(
+            forName: ImagesListService.didChangeNotification,
+            object: nil,
+            queue: .main,
+            using: { _ in
+                self.updateTableViewAnimated()
+            })
+    }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         cell.delegete = self
@@ -32,18 +45,10 @@ class ImagesListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = ImageListPresenter()
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
-        
-        imagesListServiceObserver = NotificationCenter.default.addObserver(
-            forName: ImagesListService.didChangeNotification,
-            object: nil,
-            queue: .main,
-            using: { _ in
-                self.updateTableViewAnimated()
-            })
         
         presenter?.fetchImages()
     }

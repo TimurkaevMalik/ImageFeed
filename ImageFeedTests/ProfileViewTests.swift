@@ -41,7 +41,6 @@ final class ProfileViewTests: XCTestCase {
         XCTAssertEqual(viewController.loginNameLabel.text, "@\(profile.userName)")
         XCTAssertEqual(viewController.descriptionLabel.text, profile.bio)
     }
-    
 }
 
 

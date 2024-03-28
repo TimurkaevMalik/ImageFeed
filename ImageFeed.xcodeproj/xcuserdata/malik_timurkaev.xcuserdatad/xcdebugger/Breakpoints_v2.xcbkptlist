@@ -3,4 +3,84 @@
    uuid = "04423DCA-6873-4B76-9F7A-C168F4AA185B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ImageFeedTests/ImagesListTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "configCellHeight(tableView:heightForRowAt:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b07511acb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageFeedTests.ImageListPresenterTest.configCellHeight(tableView: __C.UITableView, heightForRowAt: Foundation.IndexPath) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "ImageFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeedTests/ImagesListTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b07511a28"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageFeedTests.ImageListPresenterTest.configCellHeight(tableView: __C.UITableView, heightForRowAt: Foundation.IndexPath) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "ImageFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeedTests/ImagesListTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b07511aea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageFeedTests.ImageListPresenterTest.configCellHeight(tableView: __C.UITableView, heightForRowAt: Foundation.IndexPath) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "ImageFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeedTests/ImagesListTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b075119d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ImageFeedTests.ImageListPresenterTest.configCellHeight(tableView: __C.UITableView, heightForRowAt: Foundation.IndexPath) -&gt; CoreGraphics.CGFloat"
+                  moduleName = "ImageFeedTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/malik_timurkaev/Documents/App.Folder/ImageFeed/ImageFeedTests/ImagesListTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

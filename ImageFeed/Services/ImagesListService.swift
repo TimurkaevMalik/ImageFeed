@@ -10,7 +10,7 @@ import Foundation
 final class ImagesListService {
     
     static let shared = ImagesListService()
-    private(set) var photos: [Photo] = []
+    var photos: [Photo] = []
     private let oauth2TokenStorage = OAuth2TokenStorage()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
@@ -23,6 +23,7 @@ final class ImagesListService {
         case codeError
         case responseError
         case invalidRequest
+        case dataError
     }
     
     func removePhotos(){
@@ -31,14 +32,17 @@ final class ImagesListService {
     
     func fetchPhotosNextPage(token: String, comletion: @escaping (Result<[Photo],Error>) -> Void) {
         
-        guard fetchingPhotosTask == nil else {return}
+        guard fetchingPhotosTask == nil else {
+            return
+        }
         
         let nextPage = (lastLoadedPage ?? 0) + 1
         lastLoadedPage = nextPage
         
         guard let request = makeRequstBody(pageNumber: nextPage, token: token) else {
             comletion(.failure(ImagesListServiceError.codeError))
-            return}
+            return
+        }
         
         let session = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             
@@ -68,8 +72,7 @@ final class ImagesListService {
                         for photo in decodedData {
                             self.photos.append(Photo(photoResult: photo))
                         }
-
-                        print(self.photos)
+                        
                         NotificationCenter.default.post(
                             name: ImagesListService.didChangeNotification,
                             object: self,
@@ -77,8 +80,11 @@ final class ImagesListService {
                         
                         comletion(.success(self.photos))
                     } catch {
-                        comletion(.failure(ImagesListServiceError.codeError))
+                        print("🚫🚫🚫ERROR WHILE DECODING")
+                        comletion(.failure(ImagesListServiceError.dataError))
                     }
+                } else {
+                    comletion(.failure(ImagesListServiceError.dataError))
                 }
                 self.fetchingPhotosTask = nil
             }
@@ -99,7 +105,9 @@ final class ImagesListService {
             
             DispatchQueue.main.async {
                 
-                guard let self = self else {return}
+                guard let self = self else {
+                    return
+                }
                 
                 if let error = error {
                     completion(.failure(error))

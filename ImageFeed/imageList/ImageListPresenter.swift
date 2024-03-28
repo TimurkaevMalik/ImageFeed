@@ -18,10 +18,18 @@ class ImageListPresenter: ImageListPresenterProtocol{
 
     
     func fetchImages() {
-        guard let token = oauth2TokenStorage.token else {return}
+        guard let token = oauth2TokenStorage.token else {
+            return
+        }
         
         imagesListService.fetchPhotosNextPage(token: token) { result in
             
+            switch result {
+            case .success(let photosRecieved):
+                print("❤️❤️❤️PHOTOS WAS RECIEVED")
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -55,11 +63,15 @@ class ImageListPresenter: ImageListPresenterProtocol{
     
     func shouldUpdate(tableView: UITableView?){
         
-        guard let tableView = tableView else {return}
+        guard let tableView = tableView else {
+            return
+        }
         
         let oldCount = photos.count
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos
+        
+        print("🔰🔰🔰\(photos)")
         
         if oldCount != newCount {
             tableView.performBatchUpdates {
@@ -67,6 +79,7 @@ class ImageListPresenter: ImageListPresenterProtocol{
                 
                 for i in oldCount..<newCount {
                     indexPath.append(IndexPath(row: i, section: 0))
+                    print(indexPath)
                 }
                 tableView.insertRows(at: indexPath, with: .automatic)
             } completion: { _ in
