@@ -35,14 +35,14 @@ final class ImageFeedUITests: XCTestCase {
         
         loginTextField.tap()
         sleep(1)
-        loginTextField.typeText("timurkaev_malik@icloud.com")
+        loginTextField.typeText("")
         sleep(1)
         doneButton.tap()
         
         sleep(1)
         passwordTextField.tap()
         sleep(1)
-        passwordTextField.typeText("Marktsar_2002")
+        passwordTextField.typeText("")
         sleep(1)
         doneButton.tap()
         
@@ -90,8 +90,8 @@ final class ImageFeedUITests: XCTestCase {
         app.tabBars.buttons.element(boundBy: 1).tap()
         
         sleep(2)
-        XCTAssertTrue(app.staticTexts["Malik Timurkaev"].exists)
-        XCTAssertTrue(app.staticTexts["@malik_timurkaev"].exists)
+        XCTAssertTrue(app.staticTexts[""].exists)
+        XCTAssertTrue(app.staticTexts[""].exists)
         
         sleep(1)
         app.buttons["LogoutRedButton"].tap()

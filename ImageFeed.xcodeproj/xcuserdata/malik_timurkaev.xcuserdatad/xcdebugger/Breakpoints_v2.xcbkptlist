@@ -16,8 +16,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
             endingLineNumber = "90"
-            landmarkName = "ImageListPresenterTest"
-            landmarkType = "3">
+            landmarkName = "configCellHeight(tableView:heightForRowAt:)"
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "AE1A1DC0-6541-4A45-9764-5A484630B028 - 4269da2b07511acb"
