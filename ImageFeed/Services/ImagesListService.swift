@@ -13,6 +13,7 @@ final class ImagesListService {
     var photos: [Photo] = []
     private let oauth2TokenStorage = OAuth2TokenStorage()
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    static let didChangeLikeValue = Notification.Name(rawValue: "ImagesListServiceDidChangeLikeValue")
     
     private var lastLoadedPage: Int?
     private var fetchingPhotosTask: URLSessionTask?
@@ -94,7 +95,7 @@ final class ImagesListService {
     }
     
     
-    func changeLike(photoId: String, isLike: Bool, token: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func changeLike(photoId: String, isLike: Bool, token: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         
         guard let request = makeLikeRequestBody(photoId: photoId, isLike: isLike, token: token) else {
             completion(.failure(ImagesListServiceError.codeError))
@@ -118,14 +119,15 @@ final class ImagesListService {
                     
                     print(response.statusCode)
                     completion(.failure(ImagesListServiceError.responseError))
+                    return
                 }
                 
                 if let data = data {
                     do {
-                        
+                        print("🔰🔰🔰\(self.photos[0].isLiked)")
                         let decodedData = try JSONDecoder().decode(SinglePhotoDecoder.self, from: data)
                         
-
+                        
                         if let index = self.photos.firstIndex(where: { $0.id == photoId }) {
                             
                             var photo = self.photos[index]
@@ -134,8 +136,13 @@ final class ImagesListService {
                             
                             self.photos.remove(at: index)
                             self.photos.insert(photo, at: index)
+                            print("🔰🔰🔰\(self.photos[0].isLiked)")
+                            NotificationCenter.default.post(
+                                name: ImagesListService.didChangeLikeValue,
+                                object: self,
+                                userInfo: ["isLiked" : decodedData])
                             
-                            completion(.success(print("")))
+                            completion(.success(decodedData.photo.isLiked))
                         } else {
                             print("FAILED")
                             completion(.failure(ImagesListServiceError.codeError))

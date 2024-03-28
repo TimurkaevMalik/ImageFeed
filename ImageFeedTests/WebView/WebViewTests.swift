@@ -9,9 +9,10 @@
 import Foundation
 import XCTest
 
+
 final class WebViewTests: XCTestCase {
-
-
+    
+    
     func testViewControllerCallsViewDidLoad(){
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -27,7 +28,7 @@ final class WebViewTests: XCTestCase {
     }
     
     func testPresenterCallsLoadRequest() {
-        let authHelper = AuthHelper()
+        let authHelper = AuthHelper(configuration: AuthConfiguration.standard)
         let presenter = WebViewPresenter(authHelper: authHelper)
         let webViewController = WebViewViewControllerSpy()
         
@@ -40,7 +41,7 @@ final class WebViewTests: XCTestCase {
     }
     
     func testProgressVisibleWhenLessThenOne() {
-        let authHelper = AuthHelper()
+        let authHelper = AuthHelper(configuration: AuthConfiguration.standard)
         let presenter = WebViewPresenter(authHelper: authHelper)
         let progress: Float = 0.6
         
@@ -50,7 +51,7 @@ final class WebViewTests: XCTestCase {
     }
     
     func testProgressHidenWhenOne() {
-        let authHelper = AuthHelper()
+        let authHelper = AuthHelper(configuration: AuthConfiguration.standard)
         let presenter = WebViewPresenter(authHelper: authHelper)
         let progress: Float = 1.0
         
@@ -61,7 +62,7 @@ final class WebViewTests: XCTestCase {
     
     func testAuthHelperAuthURL() {
         let configuration = AuthConfiguration.standard
-        let authHelper = AuthHelper()
+        let authHelper = AuthHelper(configuration: AuthConfiguration.standard)
         
         let url = authHelper.authURL()
         let urlString = url!.absoluteString
@@ -74,7 +75,7 @@ final class WebViewTests: XCTestCase {
     }
     
     func testCodeFromURL() {
-        let authHelper = AuthHelper()
+        let authHelper = AuthHelper(configuration: AuthConfiguration.standard)
         var urlComponents = URLComponents(string: "https://unsplash.com/oauth/authorize/native")!
         urlComponents.queryItems = [URLQueryItem(name: "code", value: "test code")]
         let url = urlComponents.url!
@@ -83,37 +84,4 @@ final class WebViewTests: XCTestCase {
         
         XCTAssertEqual(code, "test code")
     }
-}
-
-
-class WebViewPresenterSpy: WebViewPresenterProtocol {
-    var viewDidLoadCalled: Bool = false
-    var view: WebViewViewControllerProtocol?
-    
-    func viewDidLoad() {
-        viewDidLoadCalled = true
-        
-        let request = URLRequest(url: URL(string: "nil")!)
-        view?.load(request: request)
-    }
-    
-    func didUpdateProgressValue(_ newValue: Double) {}
-    
-    func code(from url: URL) -> String? {
-        return nil
-    }
-}
-
-
-class WebViewViewControllerSpy: WebViewViewControllerProtocol {
-    var loadMethodCalled = false
-    var presenter: WebViewPresenterProtocol?
-    
-    func load(request: URLRequest) {
-        loadMethodCalled = true
-    }
-    
-    func setProgressValue(_ newValue: Float) {}
-    
-    func setProgressHidden(_ isHidden: Bool) {}
 }

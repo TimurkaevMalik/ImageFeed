@@ -98,9 +98,9 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         makeSplashViewControllerScreen()
-
+        
         if let token = oauth2TokenStorage.token {
-
+            
             fetchProfileInfo(token: token)
         } else {
             switchToAuthViewController()

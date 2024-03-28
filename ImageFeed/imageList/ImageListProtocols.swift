@@ -12,12 +12,16 @@ protocol ImagesListCellDelegate: AnyObject {
     func imageListCellDidTapLike(_ cell: ImagesListCell)
 }
 
+protocol ImagesListCellProtocol {
+    func setIsLiked(_ isLiked: Bool)
+}
+
 protocol ImageListPresenterProtocol: AnyObject {
     var photos: [Photo] { get set }
     
     func makeCell(for cell: ImagesListCell, with indexPath: IndexPath)
     
-    func changeLikeRequest(indexPath: IndexPath, cell: ImagesListCell)
+    func changeLikeRequest(indexPath: IndexPath, cell: ImagesListCellProtocol)
     
     func configCellHeight(tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     

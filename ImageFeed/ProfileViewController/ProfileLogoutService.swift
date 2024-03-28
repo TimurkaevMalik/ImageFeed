@@ -8,13 +8,13 @@
 import Foundation
 import WebKit
 
-class ProfileLogoutService {
+final class ProfileLogoutService {
     static let shared = ProfileLogoutService()
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let profileImageService = ProfileImageService.shared
     private let profileService = ProfileService.shared
     private let imagesListService = ImagesListService.shared
-
+    
     private init() {}
     
     func logOut(){

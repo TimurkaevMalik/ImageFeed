@@ -9,9 +9,9 @@ import Foundation
 
 
 final class AuthHelper: AuthHelperProtocol {
-    let configuration: AuthConfiguration
+    private let configuration: AuthConfiguration
     
-    init(configuration: AuthConfiguration = .standard) {
+    init(configuration: AuthConfiguration) {
         self.configuration = configuration
     }
     
@@ -28,10 +28,10 @@ final class AuthHelper: AuthHelperProtocol {
         }
         
         urlComponents.queryItems = [
-                    URLQueryItem(name: "client_id", value: configuration.accessKey),
-                    URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
-                    URLQueryItem(name: "response_type", value: "code"),
-                    URLQueryItem(name: "scope", value: configuration.accessScope)
+            URLQueryItem(name: "client_id", value: configuration.accessKey),
+            URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: configuration.accessScope)
         ]
         
         return urlComponents.url
