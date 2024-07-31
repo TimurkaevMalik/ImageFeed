@@ -38,14 +38,10 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         
         if let profile = profileService.profile {
             updateProfileDetails(profile: profile)
-        } else {
-            print("variable profileService.profile is empty")
         }
         
         if profileImageService.avatarURL != nil {
             updateAvatar()
-        } else {
-            print("variable profileImageService.avatarURL is empty")
         }
         
         nameLabel.textColor = UIColor(named: "YPWhite")

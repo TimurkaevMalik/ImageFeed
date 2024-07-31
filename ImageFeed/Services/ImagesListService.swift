@@ -60,7 +60,7 @@ final class ImagesListService {
                 
                 if let response = response as? HTTPURLResponse,
                    response.statusCode < 200 || response.statusCode >= 300 {
-                    print(response.statusCode)
+                    
                     comletion(.failure(ImagesListServiceError.responseError))
                     return
                 }
@@ -81,7 +81,7 @@ final class ImagesListService {
                         
                         comletion(.success(self.photos))
                     } catch {
-                        print("🚫🚫🚫ERROR WHILE DECODING")
+                        
                         comletion(.failure(ImagesListServiceError.dataError))
                     }
                 } else {
@@ -117,7 +117,7 @@ final class ImagesListService {
                 
                 if let response = response as? HTTPURLResponse, response.statusCode < 200 || response.statusCode >= 300 {
                     
-                    print(response.statusCode)
+                    
                     completion(.failure(ImagesListServiceError.responseError))
                     return
                 }

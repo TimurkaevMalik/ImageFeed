@@ -17,7 +17,6 @@ final class ImagesListCell: UITableViewCell, ImagesListCellProtocol {
     weak var delegate: ImagesListCellDelegate?
     
     func setIsLiked(_ isLiked: Bool) {
-        print(isLiked)
         
         likeButton.setImage(UIImage(named: isLiked ? "redLike" : "emptyLike"), for: .normal)
     }

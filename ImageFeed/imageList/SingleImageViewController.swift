@@ -50,7 +50,6 @@ final class SingleImageViewController: UIViewController {
                                            completion: {
                                                self.zoomImage()
                                            }))
-                    break
                 }
                 
                 UIBlockingProgressHUD.dismiss()
