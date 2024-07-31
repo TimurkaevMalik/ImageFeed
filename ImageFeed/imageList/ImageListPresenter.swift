@@ -26,10 +26,10 @@ final class ImageListPresenter: ImageListPresenterProtocol{
         imagesListService.fetchPhotosNextPage(token: token) { result in
             
             switch result {
-            case .success(let photosRecieved):
-                print("❤️❤️❤️PHOTOS WAS RECIEVED")
+            case .success:
+                break
             case .failure(let error):
-                print(error)
+                assertionFailure("Failed to fetch images with error: \(error)")
             }
         }
     }
@@ -72,16 +72,14 @@ final class ImageListPresenter: ImageListPresenterProtocol{
         let newCount = imagesListService.photos.count
         photos = imagesListService.photos
         
-        print("🔰🔰🔰\(photos)")
-        
         if oldCount != newCount {
             tableView.performBatchUpdates {
                 var indexPath: [IndexPath] = []
                 
                 for i in oldCount..<newCount {
                     indexPath.append(IndexPath(row: i, section: 0))
-                    print(indexPath)
                 }
+        
                 tableView.insertRows(at: indexPath, with: .automatic)
             } completion: { _ in
             }
@@ -95,21 +93,21 @@ final class ImageListPresenter: ImageListPresenterProtocol{
         }
         
         let photo = photos[indexPath.row]
-        print("✅✅✅\(photo.isLiked)")
+        
         UIBlockingProgressHUD.show()
+        
         imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked, token: token) { result in
             
             UIBlockingProgressHUD.dismiss()
             
             switch result{
                 
-            case .success(let result):
+            case .success:
                 self.photos = self.imagesListService.photos
-                print("✅✅✅\(self.photos[indexPath.row].isLiked)")
                 cell.setIsLiked(self.photos[indexPath.row].isLiked)
                 
-            case .failure:
-                break
+            case .failure(let error):
+                assertionFailure("Failed to complete change like request with error: \(error)")
             }
         }
     }

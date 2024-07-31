@@ -28,7 +28,8 @@ final class AuthViewController: UIViewController {
             case .success:
                 self.delegate?.authViewController(self, didAuthenticateWithCode: code)
                 
-            case .failure:
+            case .failure(let error):
+                
                 UIBlockingProgressHUD.dismiss()
                 
                 self.alertPresenter.showAlert(vc: self, result: AlertModel(
@@ -36,7 +37,7 @@ final class AuthViewController: UIViewController {
                     title: "Что-то пошло не так",
                     buttonText: "Ок", completion: {}
                 ))
-                break
+                assertionFailure("Failed to fetch token with error: \(error)")
             }
         }
     }

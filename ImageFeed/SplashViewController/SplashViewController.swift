@@ -82,7 +82,6 @@ final class SplashViewController: UIViewController {
                         UIBlockingProgressHUD.show()
                         self.fetchProfileInfo(token: token)
                     }))
-                break
             }
         }
     }

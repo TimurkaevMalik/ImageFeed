@@ -84,7 +84,6 @@ final class ImagesListTests: XCTestCase {
         
         sleep(3)
         let newCount = presenter.photos.count
-        print(newCount, oldCount)
         
         XCTAssertNotEqual(oldCount, newCount)
     }
