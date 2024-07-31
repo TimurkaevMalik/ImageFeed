@@ -14,7 +14,7 @@ final class ImagesListCell: UITableViewCell, ImagesListCellProtocol {
     @IBOutlet var cellImage: UIImageView!
     
     static let reuseIdentifier = "ImagesListCell"
-    weak var delegete: ImagesListCellDelegate?
+    weak var delegate: ImagesListCellDelegate?
     
     func setIsLiked(_ isLiked: Bool) {
         print(isLiked)
@@ -30,6 +30,6 @@ final class ImagesListCell: UITableViewCell, ImagesListCellProtocol {
     }
     
     @IBAction func likeButtonClicked() {
-        delegete?.imageListCellDidTapLike(self)
+        delegate?.imageListCellDidTapLike(self)
     }
 }

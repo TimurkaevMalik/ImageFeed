@@ -39,10 +39,8 @@ final class SingleImageViewController: UIViewController {
                 case .success(let result2):
                     self.image = result2.image
                     self.rescaleAndCenterImageInScrollView(photo: result2.image)
-                    UIBlockingProgressHUD.dismiss()
                     
                 case .failure:
-                    UIBlockingProgressHUD.dismiss()
                     self.alertPresenter.showAlert(
                         vc: self,
                         result: AlertModel(message: message,
@@ -54,6 +52,8 @@ final class SingleImageViewController: UIViewController {
                                            }))
                     break
                 }
+                
+                UIBlockingProgressHUD.dismiss()
             }
         }
     }
