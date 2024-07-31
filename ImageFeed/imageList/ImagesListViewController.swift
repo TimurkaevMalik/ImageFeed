@@ -36,7 +36,7 @@ final class ImagesListViewController: UIViewController {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        cell.delegete = self
+        cell.delegate = self
         
         presenter?.makeCell(for: cell, with: indexPath)
     }

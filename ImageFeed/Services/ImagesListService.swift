@@ -124,7 +124,7 @@ final class ImagesListService {
                 
                 if let data = data {
                     do {
-                        print("🔰🔰🔰\(self.photos[0].isLiked)")
+                        
                         let decodedData = try JSONDecoder().decode(SinglePhotoDecoder.self, from: data)
                         
                         
@@ -136,7 +136,7 @@ final class ImagesListService {
                             
                             self.photos.remove(at: index)
                             self.photos.insert(photo, at: index)
-                            print("🔰🔰🔰\(self.photos[0].isLiked)")
+                            
                             NotificationCenter.default.post(
                                 name: ImagesListService.didChangeLikeValue,
                                 object: self,
@@ -144,7 +144,6 @@ final class ImagesListService {
                             
                             completion(.success(decodedData.photo.isLiked))
                         } else {
-                            print("FAILED")
                             completion(.failure(ImagesListServiceError.codeError))
                         }
                     } catch {
@@ -176,7 +175,7 @@ final class ImagesListService {
         
         urlComponents?.queryItems = [
             URLQueryItem(name: "page", value: "\(pageNumber)"),
-            URLQueryItem(name: "per_page", value: "5"),
+            URLQueryItem(name: "per_page", value: "10"),
             URLQueryItem(name: "order_by", value: "latest")
         ]
         
