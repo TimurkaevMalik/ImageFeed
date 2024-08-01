@@ -31,6 +31,7 @@ final class SplashViewController: UIViewController {
     
     private func switchToTabBarController() {
         
+<<<<<<< HEAD
         guard let window = UIApplication.shared.windows.first else {
             assertionFailure("Invalid Configuration")
             return
@@ -84,6 +85,13 @@ final class SplashViewController: UIViewController {
                     }))
             }
         }
+=======
+        guard let window = UIApplication.shared.windows.first else { fatalError("Invalid Configuration") }
+        
+        let tabBarController = UIStoryboard(name: "Main" , bundle: .main).instantiateViewController(identifier: "TabBarViewController")
+        
+        window.rootViewController = tabBarController
+>>>>>>> 280f1f59e6b1be259409fd6820327816a203c8c6
     }
     
     private func fetchImageURL(token: String){
@@ -111,7 +119,30 @@ final class SplashViewController: UIViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     
     func authViewController(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        
+<<<<<<< HEAD
         dismiss(animated: true)
+=======
+        
+        dismiss(animated: true) { [weak self] in
+            guard let self = self else {return}
+            
+            fetchToken(code: code)
+        }
+    }
+    
+    func fetchToken(code: String){
+        
+        self.oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
+            
+            guard let self = self else {return}
+            
+            switch result{
+            case .success:
+                self.switchToTabBarController()
+            case .failure:
+                break
+            }
+        }
+>>>>>>> 280f1f59e6b1be259409fd6820327816a203c8c6
     }
 }
