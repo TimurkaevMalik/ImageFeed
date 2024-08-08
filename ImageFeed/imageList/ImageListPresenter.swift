@@ -42,6 +42,7 @@ final class ImageListPresenter: ImageListPresenterProtocol{
         let isLiked = photos[indexPath.row].isLiked
         
         let likeImage = isLiked ? UIImage(named: "redLike") : UIImage(named: "emptyLike")
+        
         cell.likeButton.setImage(likeImage, for: .normal)
         
         cell.dateLabel.text = dateFormatter.fomateStringDate(string: photos[indexPath.row].createdAt)

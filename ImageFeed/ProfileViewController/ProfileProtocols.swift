@@ -10,10 +10,11 @@ import UIKit
 
 protocol ProfilePresenterProtocol {
     var view: ProfileViewControllerProtocol? { get set }
-    func logoutAlert(vc: UIViewController)
+    func logoutAlert()
     func avatarURL() -> URL?
 }
 
 protocol ProfileViewControllerProtocol: AnyObject {
     func switchToSplashController()
+    func logoutAlert(model: AlertModel)
 }
