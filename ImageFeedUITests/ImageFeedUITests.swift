@@ -105,6 +105,6 @@ final class ImageFeedUITests: XCTestCase {
         sleep(2)
         
         XCTAssertTrue(app.buttons["Authenticate"].exists)
-        XCTAssertTrue(app.images["auth_logo"].exists)
+        XCTAssertTrue(app.images["AuthLogo"].exists)
     }
 }

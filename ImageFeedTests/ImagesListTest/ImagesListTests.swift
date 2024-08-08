@@ -73,9 +73,7 @@ final class ImagesListTests: XCTestCase {
             queue: .main) { _ in
                 expectation.fulfill()
             }
-        //
-        //        XCTAssertEqual(imagesListService.photos.count, 0)
-        //        XCTAssertEqual(presenter.photos.count, 0)
+
         let oldCount = presenter.photos.count
         presenter.fetchImages()
         
@@ -92,11 +90,6 @@ final class ImagesListTests: XCTestCase {
         //        let imagesListService = ImagesListService.shared
         let presenter = ImageListPresenter.shared
         let presenterTest = ImageListPresenterTest()
-        //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        //        let viewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController") as! ImagesListViewController
-        //        
-        //        viewController.configure(presenterTest)
-        //        _ = viewController.view
         
         let cell = ImagesListCellTest()
         let indexPath = IndexPath(row: 0, section: 0)

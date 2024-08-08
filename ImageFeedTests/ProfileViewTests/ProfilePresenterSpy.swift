@@ -11,18 +11,19 @@ import UIKit
 
 
 final class ProfilePresenterSpy: ProfilePresenterProtocol {
+    
     var view: ImageFeed.ProfileViewControllerProtocol?
     
     var logoutAlertWasCalled = false
     var avatarURLMethodCalled = false
     
-    func logoutAlert(vc: UIViewController) {
-        logoutAlertWasCalled = true
-    }
-    
     func avatarURL() -> URL? {
         avatarURLMethodCalled = true
         
         return nil
+    }
+    
+    func logoutAlert() {
+        logoutAlertWasCalled = true
     }
 }

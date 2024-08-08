@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 final class ProfilePresenter: ProfilePresenterProtocol {
+    
     var view: ProfileViewControllerProtocol?
     
-    private let alertPresenter = AlertPresenter()
     private let profileLogoutService = ProfileLogoutService.shared
     private let profileImageService = ProfileImageService.shared
     
@@ -24,21 +24,16 @@ final class ProfilePresenter: ProfilePresenterProtocol {
         return url
     }
     
-    func logoutAlert(vc: UIViewController){
-        let message = "Уверены что хотите выйти?"
-        let title = "Пока, пока!"
-        let buttonText = "Да"
-        let cancelButtonText = "Нет"
+    func logoutAlert(){
         
-        alertPresenter.showAlert(vc: vc , result: AlertModel(
-            message: message,
-            title: title,
-            buttonText: buttonText,
-            cancelButtonText: cancelButtonText,
+        view?.logoutAlert(model: AlertModel(
+            message: "Уверены что хотите выйти?",
+            title: "Пока, пока!",
+            buttonText: "Да",
+            cancelButtonText: "Нет",
             completion: {
                 self.profileLogoutService.logOut()
                 self.view?.switchToSplashController()
-            }
-        ))
+            }))
     }
 }

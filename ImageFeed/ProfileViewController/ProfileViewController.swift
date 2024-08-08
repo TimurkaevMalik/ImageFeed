@@ -12,11 +12,11 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
     
     var presenter: ProfilePresenterProtocol?
     
-    lazy var avatarImageView = UIImageView()
+    private lazy var avatarImageView = UIImageView()
     lazy var nameLabel = UILabel()
     lazy var loginNameLabel = UILabel()
     lazy var descriptionLabel = UILabel()
-    lazy var logoutButton = UIButton()
+    private lazy var logoutButton = UIButton()
     
     private var profileImageServeceObserver: NSObjectProtocol?
     private let profileImageService = ProfileImageService.shared
@@ -113,6 +113,19 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         window.rootViewController = SplashViewController()
     }
     
+    func logoutAlert(model: AlertModel) {
+        
+        alertPresenter.showAlert(vc: self, result: AlertModel(
+            message: model.message,
+            title: model.title,
+            buttonText: model.buttonText,
+            cancelButtonText: model.cancelButtonText,
+            completion: {
+                model.completion()
+            }
+        ))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = ProfilePresenter()
@@ -131,6 +144,6 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
     }
     
     @objc func didTapLogoutButton() {
-        presenter?.logoutAlert(vc: self)
+        presenter?.logoutAlert()
     }
 }
