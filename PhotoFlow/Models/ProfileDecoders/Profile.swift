@@ -1,6 +1,6 @@
 //
 //  ProfilePublicInfo.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 01.03.2024.
 //

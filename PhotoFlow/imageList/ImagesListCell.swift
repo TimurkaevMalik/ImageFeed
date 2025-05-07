@@ -1,6 +1,6 @@
 //
 //  ImagesListCell.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 17.01.2024.
 //

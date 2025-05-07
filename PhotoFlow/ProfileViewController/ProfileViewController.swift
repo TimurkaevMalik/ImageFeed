@@ -1,6 +1,6 @@
 //
 //  ProfileViewController.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 23.01.2024.
 //

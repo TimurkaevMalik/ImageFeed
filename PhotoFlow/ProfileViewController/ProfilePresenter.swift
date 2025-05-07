@@ -1,6 +1,6 @@
 //
 //  ProfileVeiwController.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 26.03.2024.
 //

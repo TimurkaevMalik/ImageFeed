@@ -1,6 +1,6 @@
 //
 //  AuthHelper.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 25.03.2024.
 //

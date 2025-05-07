@@ -1,11 +1,11 @@
 //
 //  ImageListPresenterTest.swift
-//  ImageFeedTests
+//  PhotoFlowTests
 //
 //  Created by Malik Timurkaev on 28.03.2024.
 //
 
-@testable import ImageFeed
+@testable import PhotoFlow
 import Foundation
 import UIKit
 
@@ -20,7 +20,7 @@ final class ImageListPresenterTest: ImageListPresenterProtocol {
     private let dateFormatter = DateFormatManager.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     
-    var photos: [ImageFeed.Photo] = [
+    var photos: [PhotoFlow.Photo] = [
         Photo(photoResult: PhotoResult(
             id: "D1jr0Mevs-c",
             width: 5280,
@@ -49,7 +49,7 @@ final class ImageListPresenterTest: ImageListPresenterProtocol {
         didCallMakeCell = true
     }
     
-    func changeLikeRequest(indexPath: IndexPath, cell: ImageFeed.ImagesListCellProtocol) {
+    func changeLikeRequest(indexPath: IndexPath, cell: PhotoFlow.ImagesListCellProtocol) {
     }
     
     func configCellHeight(tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

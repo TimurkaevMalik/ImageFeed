@@ -1,6 +1,6 @@
 //
-//  ImageFeedUITestsLaunchTests.swift
-//  ImageFeedUITests
+//  PhotoFlowUITestsLaunchTests.swift
+//  PhotoFlowUITests
 //
 //  Created by Malik Timurkaev on 26.03.2024.
 //

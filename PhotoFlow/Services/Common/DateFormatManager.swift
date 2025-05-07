@@ -1,6 +1,6 @@
 //
-//  RecievedDateFormatter.swift
-//  ImageFeed
+//  DateFormatManager.swift
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 17.03.2024.
 //

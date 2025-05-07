@@ -1,11 +1,11 @@
 //
 //  ImagesListCellTest.swift
-//  ImageFeedTests
+//  PhotoFlowTests
 //
 //  Created by Malik Timurkaev on 28.03.2024.
 //
 
-@testable import ImageFeed
+@testable import PhotoFlow
 import Foundation
 
 

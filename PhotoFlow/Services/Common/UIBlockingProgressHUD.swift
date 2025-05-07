@@ -1,6 +1,6 @@
 //
 //  UIBlockingProgressHUD.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 27.02.2024.
 //

@@ -1,6 +1,6 @@
 //
 //  PhotoResult.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 12.03.2024.
 //

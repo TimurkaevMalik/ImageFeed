@@ -1,6 +1,6 @@
 //
 //  SingleImageViewController.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 25.01.2024.
 //

@@ -1,6 +1,6 @@
 //
 //  WebViewViewController.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 10.02.2024.
 //

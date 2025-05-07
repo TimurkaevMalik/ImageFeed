@@ -1,6 +1,6 @@
 //
 //  ProfileService.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 29.02.2024.
 //

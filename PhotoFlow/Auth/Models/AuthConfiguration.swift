@@ -1,6 +1,6 @@
 //
 //  Constants.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 07.02.2024.
 //

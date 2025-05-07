@@ -1,11 +1,11 @@
 //
-//  ImageFeedTests.swift
-//  ImageFeedTests
+//  PhotoFlowTests.swift
+//  PhotoFlowTests
 //
 //  Created by Malik Timurkaev on 25.03.2024.
 //
 
-@testable import ImageFeed
+@testable import PhotoFlow
 import Foundation
 import XCTest
 

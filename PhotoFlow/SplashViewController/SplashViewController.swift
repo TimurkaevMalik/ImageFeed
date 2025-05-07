@@ -1,6 +1,6 @@
 //
 //  SplashViewController.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 19.02.2024.
 //

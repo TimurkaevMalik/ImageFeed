@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 05.01.2024.
 //

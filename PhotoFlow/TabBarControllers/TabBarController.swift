@@ -1,6 +1,6 @@
 //
 //  TabBarController.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 07.03.2024.
 //

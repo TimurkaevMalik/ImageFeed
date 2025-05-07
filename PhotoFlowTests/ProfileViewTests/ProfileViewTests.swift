@@ -1,11 +1,11 @@
 //
 //  ProfileViewTests.swift
-//  ImageFeedTests
+//  PhotoFlowTests
 //
 //  Created by Malik Timurkaev on 26.03.2024.
 //
 
-@testable import ImageFeed
+@testable import PhotoFlow
 import XCTest
 
 final class ProfileViewTests: XCTestCase {

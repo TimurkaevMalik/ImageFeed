@@ -1,6 +1,6 @@
 //
 //  AuthViewController.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 09.02.2024.
 //

@@ -1,6 +1,6 @@
 //
 //  SinglePhotoDecoder.swift
-//  ImageFeed
+//  PhotoFlow
 //
 //  Created by Malik Timurkaev on 15.03.2024.
 //
