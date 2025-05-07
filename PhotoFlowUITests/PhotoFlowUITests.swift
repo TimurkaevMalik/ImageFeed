@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class ImageFeedUITests: XCTestCase {
+final class PhotoFlowUITests: XCTestCase {
     
     private let app = XCUIApplication()
     

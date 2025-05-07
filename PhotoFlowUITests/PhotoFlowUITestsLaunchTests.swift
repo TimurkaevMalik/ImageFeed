@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class ImageFeedUITestsLaunchTests: XCTestCase {
+final class PhotoFlowUITestsLaunchTests: XCTestCase {
     
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

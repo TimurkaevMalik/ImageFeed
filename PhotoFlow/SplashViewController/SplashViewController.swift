@@ -18,7 +18,6 @@ final class SplashViewController: UIViewController {
     
     private func makeSplashViewControllerScreen(){
         view.backgroundColor = UIColor(named: "YPBlack")
-        logoImage.image = UIImage(named: "Vector")
         
         logoImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logoImage)
